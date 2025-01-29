@@ -1,1 +1,48 @@
+/* Import Philosopher font */
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 
+/* Apply general styling */
+body {
+  background-color: #EDF8C7;
+  font-family: 'Philosopher', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Styling for buttons */
+button {
+  background-color: #2B2D42;
+  color: white;
+  border: 2px solid #C28E00;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  border-radius: 5px;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #C28E00;
+  border-color: #2B2D42;
+}
+
+/* Styling for borders of divs or sections */
+.container, .section {
+  border: 2px solid #C28E00;
+  padding: 20px;
+  margin: 10px;
+}
+
+/* Add some spacing and styling to links */
+a {
+  color: #2B2D42;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #C28E00;
+}
