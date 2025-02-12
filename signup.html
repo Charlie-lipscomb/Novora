@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #EDF8C7;
+            margin: 0;
+            padding: 20px;
+        }
+        .centered-block {
+            border: 2px solid #C28E00;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .signup-btn {
+            background-color: #C28E00;
+            color: white;
+        }
+        .signup-btn:hover {
+            background-color: #A37400;
+        }
+        .login-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        .login-btn:hover {
+            background-color: #bbb;
+        }
+    </style>
+    <script>
+        function redirectToLogin() {
+            window.location.href = 'loginpage.html';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="centered-block">
+        <h2>Sign Up</h2>
+        <form action="/submit_signup" method="POST">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div>
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
+            </div>
+            <div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </div>
+            <div>
+                <button type="button" class="login-btn" onclick="redirectToLogin();">Back to Login</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
