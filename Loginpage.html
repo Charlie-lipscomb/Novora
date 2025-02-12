@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <title>Login Page</title>
     <style>
         body {
             display: flex;
@@ -39,32 +39,35 @@
             cursor: pointer;
             margin: 10px;
         }
-        .signup-btn {
+        .login-btn {
             background-color: #C28E00;
             color: white;
         }
-        .signup-btn:hover {
+        .login-btn:hover {
             background-color: #A37400;
         }
-        .login-btn {
+        .signup-btn {
             background-color: #ccc;
             color: black;
         }
-        .login-btn:hover {
-            background-color: #bbb;
+        .signup-btn:hover {
+            background-color: #ccc;
         }
     </style>
     <script>
-        function redirectToLogin() {
-            window.location.href = 'loginpage.html';
+        function redirectToIndex() {
+            window.location.href = 'index.html';
+        }
+        function redirectToSignup() {
+            window.location.href = 'signup.html';
         }
     </script>
 </head>
 <body>
 
     <div class="centered-block">
-        <h2>Sign Up</h2>
-        <form action="/submit_signup" method="POST">
+        <h2>Novora</h2>
+        <form onsubmit="event.preventDefault(); redirectToIndex();">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
@@ -78,14 +81,10 @@
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
             <div>
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
+                <button type="submit" class="login-btn">Login</button>
             </div>
             <div>
-                <button type="submit" class="signup-btn">Sign Up</button>
-            </div>
-            <div>
-                <button type="button" class="login-btn" onclick="redirectToLogin();">Back to Login</button>
+                <button type="button" class="signup-btn" onclick="redirectToSignup();">Sign Up</button>
             </div>
         </form>
     </div>
