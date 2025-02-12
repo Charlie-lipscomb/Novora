@@ -1,6 +1,18 @@
 /* Import Philosopher font */
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 
+
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Add this line to create a 3-column grid */
+    gap: 20px;
+    padding: 20px;
+}
+
+
+
 /* Apply general styling */
 body {
   background-color: #EDF8C7;
