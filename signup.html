@@ -60,8 +60,8 @@
         }
 
         function handleSignup(event) {
-            event.preventDefault();
-            
+            event.preventDefault(); // PREVENTS THE 405 ERROR
+
             const username = document.getElementById("username").value;
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -85,7 +85,7 @@
 
     <div class="centered-block">
         <h2>Sign Up</h2>
-        <form onsubmit="handleSignup(event)">
+        <form onsubmit="handleSignup(event)"> <!-- FIXED -->
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
