@@ -46,33 +46,32 @@
         .login-btn:hover {
             background-color: #A37400;
         }
-        .signup-btn {
-            background-color: #ccc;
-            color: black;
-        }
-        .signup-btn:hover {
-            background-color: #bbb;
-        }
     </style>
     <script>
-        function redirectToSignup() {
-            window.location.href = 'signup.html';
+        function getCookie(name) {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
         }
 
-        function validateLogin(event) {
+        function login(event) {
             event.preventDefault();
-            
-            const enteredUsername = document.getElementById("username").value;
-            const enteredPassword = document.getElementById("password").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-            const users = JSON.parse(localStorage.getItem("users")) || [];
+            // Check if the entered credentials match the stored cookies
+            const storedUsername = getCookie("signedUpUser");
+            const storedPassword = getCookie("signedUpPassword");
 
-            const user = users.find(u => u.username === enteredUsername && u.password === enteredPassword);
-
-            if (user) {
-                alert("Login successful! Redirecting...");
-                localStorage.setItem("loggedInUser", enteredUsername);
-                window.location.href = 'index.html';
+            if (username === storedUsername && password === storedPassword) {
+                // Set cookies for logged-in status
+                document.cookie = "loggedInUser=" + storedUsername + "; path=/; max-age=2592000"; // 30 days
+                window.location.href = "index.html";
             } else {
                 alert("Invalid username or password.");
             }
@@ -80,10 +79,9 @@
     </script>
 </head>
 <body>
-
     <div class="centered-block">
-        <h2>Novora login page</h2>
-        <form onsubmit="validateLogin(event);">
+        <h2>Login</h2>
+        <form onsubmit="login(event)">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
@@ -95,11 +93,7 @@
             <div>
                 <button type="submit" class="login-btn">Login</button>
             </div>
-            <div>
-                <button type="button" class="signup-btn" onclick="redirectToSignup();">Sign Up</button>
-            </div>
         </form>
     </div>
-
 </body>
 </html>
