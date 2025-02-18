@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #EDF8C7;
+            margin: 0;
+        }
+        .account-container {
+            text-align: center;
+            border: 2px solid #C28E00;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .account-info {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #C28E00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #A37400;
+        }
+    </style>
+    <script>
+        // Function to get a cookie's value by name
+        function getCookie(name) {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
+
+        // Function to check login status
+        function checkLogin() {
+            const loggedInUser = getCookie("loggedInUser");
+            const loggedInEmail = getCookie("signedUpEmail");
+
+            if (!loggedInUser) {
+                window.location.href = "loginpage.html"; // Redirect to login if not logged in
+            } else {
+                document.getElementById("username").innerText = loggedInUser;
+                document.getElementById("email").innerText = loggedInEmail;
+            }
+        }
+    </script>
+</head>
+<body onload="checkLogin()">
+    <div class="account-container">
+        <h2>Your Account</h2>
+        <div class="account-info">
+            <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+        </div>
+        <button onclick="window.location.href='index.html'">Go to Home Page</button>
+    </div>
+</body>
+</html>
