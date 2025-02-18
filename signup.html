@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <title>Sign Up</title>
     <style>
         body {
             display: flex;
@@ -46,46 +46,38 @@
         .signup-btn:hover {
             background-color: #A37400;
         }
-        .login-btn {
-            background-color: #ccc;
-            color: black;
-        }
-        .login-btn:hover {
-            background-color: #bbb;
-        }
     </style>
     <script>
-        function redirectToLogin() {
-            window.location.href = 'loginpage.html'; // Redirects to loginpage.html
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + "; path=/" + expires;
         }
 
-        function handleSignup(event) {
-            event.preventDefault(); // Prevents form from submitting to a server
-
+        function signUp(event) {
+            event.preventDefault();
             const username = document.getElementById("username").value;
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirm_password").value;
 
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
+            // Save the data in cookies
+            setCookie("signedUpUser", username, 30);
+            setCookie("signedUpEmail", email, 30);
+            setCookie("signedUpPassword", password, 30);
 
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-            users.push({ username, email, password });
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("Signup successful! Redirecting to login.");
-            redirectToLogin();
+            // Redirect to login page
+            window.location.href = "loginpage.html";
         }
     </script>
 </head>
 <body>
-
     <div class="centered-block">
         <h2>Sign Up</h2>
-        <form onsubmit="handleSignup(event)"> <!-- Prevents default submission -->
+        <form onsubmit="signUp(event)">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
@@ -99,17 +91,9 @@
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
             <div>
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
-            </div>
-            <div>
                 <button type="submit" class="signup-btn">Sign Up</button>
-            </div>
-            <div>
-                <button type="button" class="login-btn" onclick="redirectToLogin();">Back to Login</button>
             </div>
         </form>
     </div>
-
 </body>
 </html>
