@@ -51,15 +51,31 @@
             color: black;
         }
         .signup-btn:hover {
-            background-color: #ccc;
+            background-color: #bbb;
         }
     </style>
     <script>
-        function redirectToIndex() {
-            window.location.href = 'index.html';
-        }
         function redirectToSignup() {
             window.location.href = 'signup.html';
+        }
+
+        function validateLogin(event) {
+            event.preventDefault();
+            
+            const enteredUsername = document.getElementById("username").value;
+            const enteredPassword = document.getElementById("password").value;
+
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            const user = users.find(u => u.username === enteredUsername && u.password === enteredPassword);
+
+            if (user) {
+                alert("Login successful! Redirecting...");
+                localStorage.setItem("loggedInUser", enteredUsername);
+                window.location.href = 'index.html';
+            } else {
+                alert("Invalid username or password.");
+            }
         }
     </script>
 </head>
@@ -67,14 +83,10 @@
 
     <div class="centered-block">
         <h2>Novora login page</h2>
-        <form onsubmit="event.preventDefault(); redirectToIndex();">
+        <form onsubmit="validateLogin(event);">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
-            </div>
-            <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
             </div>
             <div>
                 <label for="password">Password</label>
