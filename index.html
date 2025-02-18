@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novora Home Page</title>
     <style>
+        /* Basic reset for padding and margin */
         * {
             margin: 0;
             padding: 0;
@@ -15,6 +16,7 @@
             font-family: Arial, sans-serif;
         }
 
+        /* Styling for the header */
         header {
             display: flex;
             justify-content: space-between;
@@ -23,12 +25,19 @@
             background-color: #f8f8f8;
         }
 
+        /* Styling for the logo */
+        .logo img {
+            height: 40px; /* Adjust based on your logo's size */
+        }
+
+        /* Styling for the nav items (search bar, basket button, and account button) */
         .nav-items {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 15px; /* Space between items */
         }
 
+        /* Styling for the search bar */
         .search-bar {
             padding: 5px 10px;
             font-size: 14px;
@@ -36,7 +45,8 @@
             border-radius: 5px;
         }
 
-        .basket-btn, .account-btn {
+        /* Styling for the basket button */
+        .basket-btn {
             padding: 8px 16px;
             background-color: #333;
             color: white;
@@ -45,6 +55,17 @@
             cursor: pointer;
         }
 
+        /* Styling for the account button */
+        .account-btn {
+            padding: 8px 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Optional: Add hover effect */
         .basket-btn:hover, .account-btn:hover {
             background-color: #EDF8C7;
         }
@@ -56,99 +77,139 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             padding: 20px;
         }
 
         .product-card {
-            text-align: center;
-            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-card h3 {
+            margin-top: 10px;
+        }
+
+        .product-card p {
+            color: #333;
         }
     </style>
     <script>
-        function checkAccount() {
-            let user = localStorage.getItem("loggedInUser");
-            if (user) {
-                window.location.href = "account.html";
+        // Function to get a cookie's value by name
+        function getCookie(name) {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
+
+        // Function to check if the user is logged in
+        function checkLogin() {
+            const loggedInUser = getCookie("loggedInUser");
+            if (!loggedInUser) {
+                document.getElementById("accountBtn").innerHTML = "Login";
+                document.getElementById("accountBtn").setAttribute("onclick", "window.location.href='loginpage.html'");
             } else {
-                window.location.href = "loginpage.html";
+                document.getElementById("accountBtn").innerHTML = "Account";
+                document.getElementById("accountBtn").setAttribute("onclick", "window.location.href='account.html'");
+                document.getElementById("welcomeMessage").innerHTML = `Welcome, ${loggedInUser}!`;
             }
         }
     </script>
 </head>
-<body>
+<body onload="checkLogin()">
     <header>
         <div class="nav-items">
             <input type="text" class="search-bar" placeholder="Search...">
             <button class="basket-btn">Basket</button>
-            <button class="account-btn" onclick="checkAccount()">Account</button>
+            <button class="account-btn" id="accountBtn">Login</button>
         </div>
     </header>
+
     <main>
-        <link rel="stylesheet" href="styles.css">
+        <h2 id="welcomeMessage">Loading...</h2>
         <div class="product-grid">
+            <!-- Product 1 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch1.png" alt="Product 1" width=140>
+                    <img src="watch1.png" alt="Product 1" width="140">
                 </div>
                 <h3>Product 1</h3>
                 <p>£10.00</p>
             </div>
+            <!-- Product 2 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch2.png" alt="Product 2" width=140>
+                    <img src="watch2.png" alt="Product 2" width="140">
                 </div>
                 <h3>Product 2</h3>
                 <p>£15.00</p>
             </div>
+            <!-- Product 3 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch3.png" alt="Product 3" width=140>
+                    <img src="watch3.png" alt="Product 3" width="140">
                 </div>
                 <h3>Product 3</h3>
                 <p>£20.00</p>
             </div>
+            <!-- Product 4 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch4.png" alt="Product 4" width=140>
+                    <img src="watch4.png" alt="Product 4" width="140">
                 </div>
                 <h3>Product 4</h3>
                 <p>£25.00</p>
             </div>
+            <!-- Product 5 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch5.png" alt="Product 5" width=140>
+                    <img src="watch5.png" alt="Product 5" width="140">
                 </div>
                 <h3>Product 5</h3>
                 <p>£30.00</p>
             </div>
+            <!-- Product 6 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch6.png" alt="Product 6" width=140>
+                    <img src="watch6.png" alt="Product 6" width="140">
                 </div>
                 <h3>Product 6</h3>
                 <p>£35.00</p>
             </div>
+            <!-- Product 7 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch7.png" alt="Product 7" width=140>
+                    <img src="watch7.png" alt="Product 7" width="140">
                 </div>
                 <h3>Product 7</h3>
                 <p>£40.00</p>
             </div>
+            <!-- Product 8 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch8.png" alt="Product 8" width=140>
+                    <img src="watch8.png" alt="Product 8" width="140">
                 </div>
                 <h3>Product 8</h3>
                 <p>£45.00</p>
             </div>
+            <!-- Product 9 -->
             <div class="product-card">
                 <div class="product-image">
-                    <img src="watch9.png" alt="Product 9" width=140>
+                    <img src="watch9.png" alt="Product 9" width="140">
                 </div>
                 <h3>Product 9</h3>
                 <p>£50.00</p>
