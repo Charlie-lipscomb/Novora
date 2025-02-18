@@ -56,11 +56,11 @@
     </style>
     <script>
         function redirectToLogin() {
-            window.location.href = 'loginpage.html';
+            window.location.href = 'loginpage.html'; // Redirects to loginpage.html
         }
 
         function handleSignup(event) {
-            event.preventDefault(); // PREVENTS THE 405 ERROR
+            event.preventDefault(); // Prevents form from submitting to a server
 
             const username = document.getElementById("username").value;
             const email = document.getElementById("email").value;
@@ -85,7 +85,7 @@
 
     <div class="centered-block">
         <h2>Sign Up</h2>
-        <form onsubmit="handleSignup(event)"> <!-- FIXED -->
+        <form onsubmit="handleSignup(event)"> <!-- Prevents default submission -->
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username">
