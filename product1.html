@@ -5,79 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
     <style>
-        /* Global Styles */
+        /* Matching Styles from Login Page */
         body {
             font-family: Arial, sans-serif;
-            background-color: #1e1e1e; /* Matches dark theme */
+            background-color: #0d0d0d; /* Same dark background */
             color: #ffffff;
             margin: 0;
             padding: 0;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        header {
-            background-color: #333;
-            padding: 10px;
-            font-size: 24px;
-        }
-
-        footer {
-            background-color: #333;
-            padding: 10px;
-            margin-top: 20px;
-        }
-
-        /* Product Page Layout */
-        .product-container {
+        .container {
+            background-color: #1a1a1a; /* Same dark grey container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
-            padding: 20px;
-            flex-wrap: wrap;
+            width: 80%;
+            max-width: 600px;
         }
 
         .product-image img {
-            width: 300px;
+            width: 200px;
             height: auto;
             border-radius: 10px;
         }
 
         .product-details {
-            max-width: 500px;
             text-align: left;
         }
 
         .product-details h2 {
-            color: #f0a500; /* Accent color */
+            color: #f0a500; /* Matching accent color */
             font-size: 24px;
+            margin-bottom: 10px;
         }
 
         .product-details p {
             font-size: 16px;
-            color: #ddd;
+            color: #cccccc; /* Light grey text */
+        }
+
+        /* Button Style (if needed) */
+        .buy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f0a500;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #d18c00;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Product Page</h1>
-    </header>
-
-    <main class="product-container">
+    <div class="container">
         <div class="product-image">
             <img src="product-image.jpg" alt="Product Name">
         </div>
         <div class="product-details">
             <h2>Product Name</h2>
-            <p>This is a short description of the product. It highlights key features and provides essential details.</p>
+            <p>This is a short description of the product, following the same style as the login page.</p>
+            <a href="#" class="buy-btn">Buy Now</a>
         </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Your Website</p>
-    </footer>
+    </div>
 
 </body>
 </html>
