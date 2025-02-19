@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
+    <title>Account</title>
     <style>
         body {
             display: flex;
@@ -12,70 +12,66 @@
             height: 100vh;
             background-color: #EDF8C7;
             margin: 0;
+            padding: 20px;
         }
-        .account-container {
-            text-align: center;
+        .centered-block {
             border: 2px solid #C28E00;
             padding: 20px;
             max-width: 400px;
             width: 100%;
             background: white;
+            text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        h2 {
-            margin-bottom: 20px;
-        }
-        .account-info {
-            margin: 20px 0;
-        }
         button {
-            padding: 10px 20px;
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .logout-btn {
             background-color: #C28E00;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
-        button:hover {
+        .logout-btn:hover {
             background-color: #A37400;
         }
     </style>
     <script>
-        // Function to get a cookie's value by name
+        function checkLogin() {
+            let username = getCookie("username");
+            if (!username) {
+                window.location.href = "index.html"; // Redirect to home page if not logged in
+            } else {
+                document.getElementById("welcome-message").innerText = "Welcome, " + username;
+            }
+        }
+
+        function logout() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "index.html"; // Redirect to home page after logout
+        }
+
         function getCookie(name) {
-            let cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                let cookie = cookies[i].trim();
-                if (cookie.startsWith(name + "=")) {
-                    return cookie.substring(name.length + 1);
-                }
+            let cookies = document.cookie.split("; ");
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split("=");
+                if (key === name) return value;
             }
             return null;
         }
 
-        // Function to check login status
-        function checkLogin() {
-            const loggedInUser = getCookie("loggedInUser");
-            const loggedInEmail = getCookie("signedUpEmail");
-
-            if (!loggedInUser) {
-                window.location.href = "loginpage.html"; // Redirect to login if not logged in
-            } else {
-                document.getElementById("username").innerText = loggedInUser;
-                document.getElementById("email").innerText = loggedInEmail;
-            }
-        }
+        window.onload = checkLogin;
     </script>
 </head>
-<body onload="checkLogin()">
-    <div class="account-container">
-        <h2>Your Account</h2>
-        <div class="account-info">
-            <p><strong>Username:</strong> <span id="username">Loading...</span></p>
-            <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-        </div>
-        <button onclick="window.location.href='index.html'">Go to Home Page</button>
+<body>
+    <div class="centered-block">
+        <h2>Account Page</h2>
+        <p id="welcome-message">Loading...</p>
+        <button class="logout-btn" onclick="logout();">Logout</button>
     </div>
 </body>
 </html>
