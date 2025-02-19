@@ -3,83 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Novora</title>
+    <title>Login</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #EDF8C7;
-            margin: 0;
-            padding: 20px;
             font-family: Arial, sans-serif;
-        }
-        .centered-block {
-            border: 2px solid #C28E00;
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            background: white;
+            background-color: #EDF8C7;
             text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
         }
         input {
-            width: calc(100% - 20px);
+            display: block;
+            width: 90%;
+            margin: 10px auto;
             padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            font-size: 16px;
         }
         button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        .login-btn {
-            background-color: #C28E00;
+            padding: 10px 20px;
+            background-color: #333;
             color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
-        .login-btn:hover {
+        button:hover {
             background-color: #A37400;
         }
-        .switch-btn {
-            background-color: #ccc;
-            color: black;
-        }
     </style>
-</head>
-<body>
-
-    <div class="centered-block">
-        <h2>Novora Login</h2>
-        <form onsubmit="event.preventDefault(); loginUser();">
-            <input type="text" id="login-username" required placeholder="Username">
-            <input type="password" id="login-password" required placeholder="Password">
-            <button type="submit" class="login-btn">Login</button>
-        </form>
-        <button class="switch-btn" onclick="window.location.href='signup.html'">Go to Signup</button>
-    </div>
-
     <script>
-        function loginUser() {
-            const username = document.getElementById("login-username").value;
-            const password = document.getElementById("login-password").value;
-            const savedUser = localStorage.getItem(username);
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + "; path=/" + expires;
+        }
 
-            if (savedUser && JSON.parse(savedUser).password === password) {
-                document.cookie = "loggedIn=true; path=/";
-                document.cookie = "username=" + username + "; path=/";
-                window.location.href = "index.html";
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                setCookie("username", username, 30); // Store for 30 days
+                setCookie("loggedIn", "true", 30);
+                window.location.href = "index.html"; // Redirect to homepage
             } else {
-                alert("Invalid username or password.");
+                alert("Please enter a valid username and password.");
             }
         }
-    </script>
 
+        window.onload = function () {
+            if (getCookie("loggedIn") === "true") {
+                window.location.href = "index.html"; // Redirect if already logged in
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
 </body>
 </html>
