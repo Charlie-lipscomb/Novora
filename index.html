@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novora Home Page</title>
     <style>
-        /* Basic reset for padding and margin */
+        /* Reset styles */
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +17,7 @@
             background-color: #EDF8C7;
         }
 
-        /* Styling for the header */
+        /* Header styles */
         header {
             display: flex;
             justify-content: space-between;
@@ -26,14 +26,12 @@
             background-color: #f8f8f8;
         }
 
-        /* Styling for the nav items (search bar, basket button, and account button) */
         .nav-items {
             display: flex;
             align-items: center;
-            gap: 15px; /* Space between items */
+            gap: 15px;
         }
 
-        /* Styling for the search bar */
         .search-bar {
             padding: 5px 10px;
             font-size: 14px;
@@ -41,8 +39,7 @@
             border-radius: 5px;
         }
 
-        /* Styling for the basket button */
-        .basket-btn {
+        .basket-btn, .account-btn {
             padding: 8px 16px;
             background-color: #333;
             color: white;
@@ -51,24 +48,8 @@
             cursor: pointer;
         }
 
-        /* Styling for the account button */
-        .account-btn {
-            padding: 8px 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Optional: Add hover effect */
         .basket-btn:hover, .account-btn:hover {
-            background-color: #EDF8C7;
-        }
-
-        .search-bar:focus {
-            outline: none;
-            border-color: #007BFF;
+            background-color: #C28E00;
         }
 
         /* Product Grid */
@@ -79,7 +60,7 @@
             padding: 20px;
         }
 
-        /* Styling for product cards */
+        /* Product Card Styling */
         .product-card {
             background-color: white;
             border: 2px solid #C28E00;
@@ -88,22 +69,20 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             cursor: pointer;
-            height: 300px; /* Fix height for uniformity */
+            height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* Image sizing */
+        /* Fixed Image Size */
         .product-card img {
             width: 100%;
-            height: 180px; /* Adjust image height */
-            object-fit: cover; /* Ensures the images are contained */
-            border-radius: 4px;
+            height: 200px;
+            object-fit: contain;
         }
 
         .product-card h3 {
-            margin-top: 10px;
             font-size: 16px;
         }
 
@@ -111,125 +90,90 @@
             font-size: 14px;
             color: #333;
         }
-
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <!-- Logo here -->
-        </div>
-
         <div class="nav-items">
             <input type="text" class="search-bar" placeholder="Search...">
             <button class="basket-btn">Basket</button>
-            <!-- Account button that behaves based on login status -->
-            <button class="account-btn" id="accountBtn" onclick="redirectToAccount()">Account</button>
+            <button class="account-btn" id="accountBtn" onclick="redirectToAccount()">Login</button>
         </div>
     </header>
 
     <main>
         <div class="product-grid">
-            <!-- Product 1 -->
+            <!-- Product Cards -->
             <div class="product-card" onclick="redirectToProduct('product1.html')">
-                <img src="watch1.png" alt="Product 1" width=140>
+                <img src="watch1.png" alt="Product 1">
                 <h3>Product 1</h3>
                 <p>£10.00</p>
             </div>
-            <!-- Product 2 -->
             <div class="product-card" onclick="redirectToProduct('product2.html')">
-                <img src="watch2.png" alt="Product 2" width=140>
+                <img src="watch2.png" alt="Product 2">
                 <h3>Product 2</h3>
                 <p>£15.00</p>
             </div>
-            <!-- Product 3 -->
             <div class="product-card" onclick="redirectToProduct('product3.html')">
-                <img src="watch3.png" alt="Product 3" width=140>
+                <img src="watch3.png" alt="Product 3">
                 <h3>Product 3</h3>
                 <p>£20.00</p>
             </div>
-            <!-- Product 4 -->
             <div class="product-card" onclick="redirectToProduct('product4.html')">
-                <img src="watch4.png" alt="Product 4" width=140>
+                <img src="watch4.png" alt="Product 4">
                 <h3>Product 4</h3>
                 <p>£25.00</p>
             </div>
-            <!-- Product 5 -->
             <div class="product-card" onclick="redirectToProduct('product5.html')">
-                <img src="watch5.png" alt="Product 5" width=140>
+                <img src="watch5.png" alt="Product 5">
                 <h3>Product 5</h3>
                 <p>£30.00</p>
             </div>
-            <!-- Product 6 -->
             <div class="product-card" onclick="redirectToProduct('product6.html')">
-                <img src="watch6.png" alt="Product 6" width=140>
+                <img src="watch6.png" alt="Product 6">
                 <h3>Product 6</h3>
                 <p>£35.00</p>
-            </div>
-            <!-- Product 7 -->
-            <div class="product-card" onclick="redirectToProduct('product7.html')">
-                <img src="watch7.png" alt="Product 7" width=140>
-                <h3>Product 7</h3>
-                <p>£40.00</p>
-            </div>
-            <!-- Product 8 -->
-            <div class="product-card" onclick="redirectToProduct('product8.html')">
-                <img src="watch8.png" alt="Product 8" width=140>
-                <h3>Product 8</h3>
-                <p>£45.00</p>
-            </div>
-            <!-- Product 9 -->
-            <div class="product-card" onclick="redirectToProduct('product9.html')">
-                <img src="watch9.png" alt="Product 9" width=140>
-                <h3>Product 9</h3>
-                <p>£50.00</p>
             </div>
         </div>
     </main>
 
     <script>
-        // Check if user is logged in by checking for a cookie
+        // Check login status
         window.onload = function() {
             const loggedIn = getCookie("loggedIn");
+            const accountBtn = document.getElementById("accountBtn");
+
             if (loggedIn === "true") {
-                // If logged in, the account button should take you to account.html
-                document.getElementById("accountBtn").innerText = "Account";
-                document.getElementById("accountBtn").onclick = function() {
+                accountBtn.innerText = "Account";
+                accountBtn.onclick = function() {
                     window.location.href = "account.html";
                 };
             } else {
-                // If not logged in, the account button should take you to loginpage.html
-                document.getElementById("accountBtn").innerText = "Login";
-                document.getElementById("accountBtn").onclick = function() {
+                accountBtn.innerText = "Login";
+                accountBtn.onclick = function() {
                     window.location.href = "loginpage.html";
                 };
             }
         };
 
-        // Redirect to the product page when a product is clicked
+        // Redirect function for products
         function redirectToProduct(productPage) {
             window.location.href = productPage;
         }
 
-        // Function to set a cookie
+        // Cookie functions
         function setCookie(name, value, days) {
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
         }
 
-        // Function to get a cookie by name
         function getCookie(name) {
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const cookies = decodedCookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                let c = cookies[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name + "=") == 0) {
-                    return c.substring(name.length + 1, c.length);
+            const cookies = document.cookie.split("; ");
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split("=");
+                if (key === name) {
+                    return value;
                 }
             }
             return "";
