@@ -108,13 +108,29 @@
 </head>
 <body>
 
-    <header>
-        <div class="nav-items">
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
-            <button class="basket-btn">Basket</button>
-            <button class="account-btn" onclick="checkLogin();">Account</button>
-        </div>
-    </header>
+<header>
+    <div class="nav-items">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product..." onkeyup="searchProducts()">
+        <button class="basket-btn">Basket</button>
+        <button class="account-btn" onclick="checkLogin();">Account</button>
+    </div>
+</header>
+
+<script>
+    function searchProducts() {
+        const query = document.getElementById('searchBar').value.toLowerCase();
+        const products = document.querySelectorAll('.product-card');
+
+        products.forEach(product => {
+            const productName = product.getAttribute('data-name').toLowerCase();
+            if (productName.includes(query)) {
+                product.style.display = 'block'; // Show product
+            } else {
+                product.style.display = 'none'; // Hide product
+            }
+        });
+    }
+</script>
 
     <main>
         <div class="product-grid">
