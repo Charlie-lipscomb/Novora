@@ -13,6 +13,7 @@
 
         body {
             font-family: Arial, sans-serif;
+            background-color: #EDF8C7; /* Light background color */
         }
 
         header {
@@ -20,7 +21,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: #f8f8f8;
+            background-color: rgba(248, 248, 248, 0.9); /* Slightly transparent white background */
         }
 
         .logo img {
@@ -38,6 +39,7 @@
             font-size: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 200px;
         }
 
         .basket-btn, .account-btn {
@@ -47,6 +49,10 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        .basket-btn:hover, .account-btn:hover {
+            background-color: #EDF8C7;
         }
 
         .search-bar:focus {
@@ -63,16 +69,40 @@
         }
 
         .product-card {
-            width: 140px;
+            width: 200px;
+            height: 350px;
             text-align: center;
+            padding: 20px;
+            border: 2px solid #C28E00; /* Border color changed to #C28E00 */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+            background-color: white;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .product-image img {
             width: 100%;
+            height: auto;
         }
 
         .product-card h3, .product-card p {
             margin-top: 10px;
+        }
+
+        .product-card a {
+            display: inline-block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .product-card a:hover {
+            color: #0056b3;
         }
     </style>
 </head>
@@ -80,15 +110,17 @@
 
     <header>
         <div class="nav-items">
-            <input type="text" class="search-bar" placeholder="Search..." disabled>
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
             <button class="basket-btn">Basket</button>
             <button class="account-btn" onclick="checkLogin();">Account</button>
         </div>
     </header>
 
     <main>
-        <h2>Search Results</h2>
-        <div class="product-grid" id="productGrid"></div>
+        <h1 style="text-align:center; margin-top: 20px;">Search Results</h1>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be populated dynamically here -->
+        </div>
     </main>
 
     <script>
@@ -110,35 +142,60 @@
             return null;
         }
 
-        const products = [
-            { name: "Product 1", price: "£10.00", link: "product1.html" },
-            { name: "Product 2", price: "£15.00", link: "product2.html" },
-            { name: "Product 3", price: "£20.00", link: "product3.html" },
-            { name: "Product 4", price: "£25.00", link: "product4.html" },
-            // Add more products as necessary
-        ];
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('query').toLowerCase();
-        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
-
-        const productGrid = document.getElementById('productGrid');
-
-        filteredProducts.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.classList.add('product-card');
-
-            productCard.innerHTML = `
-                <div class="product-image">
-                    <img src="${product.link.replace('.html', '.png')}" alt="${product.name}">
-                </div>
-                <h3>${product.name}</h3>
-                <p>${product.price}</p>
-                <a href="${product.link}">View</a>
-            `;
-
-            productGrid.appendChild(productCard);
+        document.getElementById('searchBar').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const query = this.value.toLowerCase();
+                if (query) {
+                    // Perform search based on the query (mock search here)
+                    displaySearchResults(query);
+                }
+            }
         });
+
+        function displaySearchResults(query) {
+            const products = [
+                { name: 'Product 1', price: '£10.00', img: 'watch1.png', link: 'product1.html' },
+                { name: 'Product 2', price: '£15.00', img: 'watch2.png', link: 'product2.html' },
+                { name: 'Product 3', price: '£20.00', img: 'watch3.png', link: 'product3.html' },
+                { name: 'Product 4', price: '£25.00', img: 'watch4.png', link: 'product4.html' },
+                { name: 'Product 5', price: '£30.00', img: 'watch5.png', link: 'product5.html' },
+                { name: 'Product 6', price: '£35.00', img: 'watch6.png', link: 'product6.html' },
+                { name: 'Product 7', price: '£40.00', img: 'watch7.png', link: 'product7.html' },
+                { name: 'Product 8', price: '£45.00', img: 'watch8.png', link: 'product8.html' },
+                { name: 'Product 9', price: '£50.00', img: 'watch9.png', link: 'product9.html' },
+                { name: 'Product 10', price: '£55.00', img: 'watch10.png', link: 'product10.html' },
+                { name: 'Product 11', price: '£60.00', img: 'watch11.png', link: 'product11.html' },
+                { name: 'Product 12', price: '£65.00', img: 'watch12.png', link: 'product12.html' }
+            ];
+
+            // Filter products based on the search query
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(query) || 
+                product.price.toLowerCase().includes(query)
+            );
+
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = ''; // Clear previous search results
+
+            // Display the filtered products
+            filteredProducts.forEach(product => {
+                const productCard = `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.img}" alt="${product.name}">
+                        </div>
+                        <h3>${product.name}</h3>
+                        <p>${product.price}</p>
+                        <a href="${product.link}">View</a>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = '<p style="text-align:center; color:red;">No products found</p>';
+            }
+        }
     </script>
 
 </body>
