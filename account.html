@@ -3,135 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Account</title>
+    <title>Account</title>
     <style>
-        /* Basic styling */
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #EDF8C7;
-            margin: 0;
-            padding: 20px;
             font-family: Arial, sans-serif;
-        }
-        .account-container {
-            border: 2px solid #C28E00;
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            background: white;
+            background-color: #EDF8C7;
             text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
         }
-        h2 {
-            margin-bottom: 20px;
+        .info {
+            margin: 10px 0;
+            font-size: 18px;
         }
-        .account-info {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        .account-info div {
-            margin-bottom: 10px;
+        #password {
+            display: inline-block;
+            letter-spacing: 3px;
         }
         button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        .logout-btn {
-            background-color: #C28E00;
+            padding: 10px 20px;
+            background-color: #333;
             color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
-        .logout-btn:hover {
+        button:hover {
             background-color: #A37400;
-        }
-        .show-password-btn {
-            background-color: #ddd;
-            color: black;
-        }
-        .show-password-btn:hover {
-            background-color: #bbb;
         }
     </style>
     <script>
-        // Get username, email, and password from cookies (stored during signup/login)
         function getCookie(name) {
-            let value = "; " + document.cookie;
-            let parts = value.split("; " + name + "=");
-            if (parts.length === 2) return parts.pop().split(";").shift();
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
         }
 
-        // Show or hide the password
+        function logout() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "index.html"; // Redirect to home page
+        }
+
         function togglePassword() {
             let passwordField = document.getElementById("password");
-            let showPasswordBtn = document.getElementById("show-password-btn");
-
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                showPasswordBtn.textContent = "Hide Password";
+            let toggleButton = document.getElementById("togglePassword");
+            if (passwordField.textContent.includes("*")) {
+                passwordField.textContent = getCookie("password") || "Not Set";
+                toggleButton.textContent = "Hide Password";
             } else {
-                passwordField.type = "password";
-                showPasswordBtn.textContent = "Show Password";
+                passwordField.textContent = "••••••••";
+                toggleButton.textContent = "Show Password";
             }
         }
 
-        // Logout function to clear cookies
-        function logoutUser() {
-            document.cookie = "username=; max-age=0; path=/";  // Clear the cookie
-            document.cookie = "email=; max-age=0; path=/";     // Clear the email cookie
-            document.cookie = "password=; max-age=0; path=/";  // Clear the password cookie
-            window.location.href = "index.html";  // Redirect to the home page
-        }
-
-        // On page load, display the user information
-        window.onload = function() {
+        window.onload = function () {
             let username = getCookie("username");
-            let email = getCookie("email");
             let password = getCookie("password");
 
-            if (!username || !email || !password) {
-                window.location.href = "loginpage.html"; // If not logged in, redirect to login
+            if (username) {
+                document.getElementById("username").textContent = username;
+            } else {
+                document.getElementById("username").textContent = "Not Logged In";
             }
 
-            // Display user details in the account page
-            document.getElementById("username-display").textContent = username;
-            document.getElementById("email-display").textContent = email;
-            document.getElementById("password").value = password; // Hide password in input
+            if (password) {
+                document.getElementById("password").textContent = "••••••••";
+            } else {
+                document.getElementById("password").textContent = "Not Set";
+            }
         };
     </script>
 </head>
 <body>
-
-    <div class="account-container">
+    <div class="container">
         <h2>Your Account</h2>
-
-        <div class="account-info">
-            <div>
-                <label>Username:</label>
-                <span id="username-display"></span>
-            </div>
-            <div>
-                <label>Email:</label>
-                <span id="email-display"></span>
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" id="password" disabled placeholder="Password" />
-                <button type="button" id="show-password-btn" class="show-password-btn" onclick="togglePassword()">Show Password</button>
-            </div>
-        </div>
-
-        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        <div class="info">Username: <span id="username"></span></div>
+        <div class="info">Password: <span id="password"></span></div>
+        <button id="togglePassword" onclick="togglePassword()">Show Password</button>
+        <br>
+        <button onclick="logout()">Logout</button>
     </div>
-
 </body>
 </html>
