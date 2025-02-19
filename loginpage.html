@@ -67,8 +67,7 @@
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
             for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                let c = ca[i].trim();
                 if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
             }
             return null;
@@ -91,7 +90,12 @@
         }
 
         function checkLoginStatus() {
-            if (getCookie("loggedIn") === "true") {
+            let loggedIn = getCookie("loggedIn");
+            let storedUsername = getCookie("username");
+            let storedPassword = getCookie("password");
+
+            // Redirect to index.html ONLY if username/password are saved AND user is marked as logged in
+            if (loggedIn === "true" && storedUsername && storedPassword) {
                 window.location.href = "index.html";
             }
         }
