@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e; /* Matches dark theme */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: #333;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        /* Product Page Layout */
+        .product-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .product-image img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-details {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .product-details h2 {
+            color: #f0a500; /* Accent color */
+            font-size: 24px;
+        }
+
+        .product-details p {
+            font-size: 16px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Product Page</h1>
+    </header>
+
+    <main class="product-container">
+        <div class="product-image">
+            <img src="product-image.jpg" alt="Product Name">
+        </div>
+        <div class="product-details">
+            <h2>Product Name</h2>
+            <p>This is a short description of the product. It highlights key features and provides essential details.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Website</p>
+    </footer>
+
+</body>
+</html>
