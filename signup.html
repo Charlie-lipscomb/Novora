@@ -3,87 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - Novora</title>
+    <title>Sign Up</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #EDF8C7;
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-        .centered-block {
-            border: 2px solid #C28E00;
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            background: white;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        .signup-btn {
-            background-color: #C28E00;
-            color: white;
-        }
-        .signup-btn:hover {
-            background-color: #A37400;
-        }
-        .switch-btn {
-            background-color: #ccc;
-            color: black;
-        }
+        /* Add your styling here */
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Sign Up</h2>
 
-    <div class="centered-block">
-        <h2>Novora Signup</h2>
-        <form onsubmit="event.preventDefault(); signupUser();">
-            <input type="text" id="signup-username" required placeholder="Username">
-            <input type="email" id="signup-email" required placeholder="Email">
-            <input type="password" id="signup-password" required placeholder="Password">
-            <button type="submit" class="signup-btn">Sign Up</button>
+        <form id="signupForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn">Sign Up</button>
         </form>
-        <button class="switch-btn" onclick="window.location.href='loginpage.html'">Go to Login</button>
+        <p>Already have an account? <a href="loginpage.html">Login here</a></p>
     </div>
 
     <script>
-        function signupUser() {
-            const username = document.getElementById("signup-username").value;
-            const email = document.getElementById("signup-email").value;
-            const password = document.getElementById("signup-password").value;
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-            if (localStorage.getItem(username)) {
-                alert("Username already exists. Please choose another.");
-                return;
-            }
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-            const userData = { email, password };
-            localStorage.setItem(username, JSON.stringify(userData));
+            // Store username and password in cookies
+            document.cookie = `username=${username}; path=/; max-age=3600`; // 1 hour expiration
+            document.cookie = `password=${password}; path=/; max-age=3600`; // 1 hour expiration
 
-            alert("Signup successful! Redirecting to login.");
-            window.location.href = "loginpage.html";
-        }
+            // Redirect to login page after successful sign-up
+            window.location.href = 'loginpage.html';
+        });
     </script>
-
 </body>
 </html>
