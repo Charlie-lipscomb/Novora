@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login - Novora</title>
     <style>
-        /* Similar styles as before */
         body {
             display: flex;
             justify-content: center;
@@ -14,6 +13,7 @@
             background-color: #EDF8C7;
             margin: 0;
             padding: 20px;
+            font-family: Arial, sans-serif;
         }
         .centered-block {
             border: 2px solid #C28E00;
@@ -47,55 +47,39 @@
         .login-btn:hover {
             background-color: #A37400;
         }
-        .signup-btn {
+        .switch-btn {
             background-color: #ccc;
             color: black;
         }
-        .signup-btn:hover {
-            background-color: #ccc;
-        }
     </style>
-    <script>
-        function loginUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-
-            // Simulate the login (add actual validation logic as needed)
-            if (username && password) {
-                // Set a cookie for the username
-                document.cookie = `username=${username}; max-age=86400; path=/`;
-                window.location.href = "index.html";  // Redirect to the home page
-            } else {
-                alert("Please fill out both fields!");
-            }
-        }
-
-        function redirectToSignup() {
-            window.location.href = "signup.html";
-        }
-    </script>
 </head>
 <body>
 
     <div class="centered-block">
-        <h2>Novora Login Page</h2>
+        <h2>Novora Login</h2>
         <form onsubmit="event.preventDefault(); loginUser();">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required placeholder="Enter your username">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
-            </div>
-            <div>
-                <button type="submit" class="login-btn">Login</button>
-            </div>
-            <div>
-                <button type="button" class="signup-btn" onclick="redirectToSignup();">Sign Up</button>
-            </div>
+            <input type="text" id="login-username" required placeholder="Username">
+            <input type="password" id="login-password" required placeholder="Password">
+            <button type="submit" class="login-btn">Login</button>
         </form>
+        <button class="switch-btn" onclick="window.location.href='signup.html'">Go to Signup</button>
     </div>
+
+    <script>
+        function loginUser() {
+            const username = document.getElementById("login-username").value;
+            const password = document.getElementById("login-password").value;
+            const savedUser = localStorage.getItem(username);
+
+            if (savedUser && JSON.parse(savedUser).password === password) {
+                document.cookie = "loggedIn=true; path=/";
+                document.cookie = "username=" + username + "; path=/";
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
+    </script>
 
 </body>
 </html>
