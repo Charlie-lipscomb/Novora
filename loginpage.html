@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novora - Login</title>
+    <title>Login</title>
     <style>
         body {
             display: flex;
@@ -13,7 +13,6 @@
             background-color: #EDF8C7;
             margin: 0;
             padding: 20px;
-            font-family: Arial, sans-serif;
         }
         .centered-block {
             border: 2px solid #C28E00;
@@ -25,20 +24,12 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        input {
+        input, button {
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-        }
-        button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
         }
         .login-btn {
             background-color: #C28E00;
@@ -53,16 +44,6 @@
         }
     </style>
     <script>
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + value + "; path=/" + expires;
-        }
-
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
@@ -75,42 +56,30 @@
 
         function login(event) {
             event.preventDefault();
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
+            let enteredUsername = document.getElementById("username").value;
+            let enteredPassword = document.getElementById("password").value;
 
-            let storedUsername = getCookie("username");
-            let storedPassword = getCookie("password");
+            let savedUsername = getCookie("username");
+            let savedPassword = getCookie("password");
 
-            if (username === storedUsername && password === storedPassword) {
-                setCookie("loggedIn", "true", 7);
-                window.location.href = "index.html";
+            if (enteredUsername === savedUsername && enteredPassword === savedPassword) {
+                document.cookie = "loggedIn=true; path=/";
+                alert("Login successful! Redirecting...");
+                window.location.href = 'index.html';
             } else {
-                alert("Incorrect username or password.");
+                alert("Invalid username or password!");
             }
         }
-
-        function checkLoginStatus() {
-            let loggedIn = getCookie("loggedIn");
-            let storedUsername = getCookie("username");
-            let storedPassword = getCookie("password");
-
-            // Redirect to index.html ONLY if username/password are saved AND user is marked as logged in
-            if (loggedIn === "true" && storedUsername && storedPassword) {
-                window.location.href = "index.html";
-            }
-        }
-
-        window.onload = checkLoginStatus;
     </script>
 </head>
 <body>
     <div class="centered-block">
         <h2>Login</h2>
         <form onsubmit="login(event)">
-            <input type="text" id="username" name="username" required placeholder="Enter your username">
-            <input type="password" id="password" name="password" required placeholder="Enter your password">
+            <input type="text" id="username" required placeholder="Enter your username">
+            <input type="password" id="password" required placeholder="Enter your password">
             <button type="submit" class="login-btn">Login</button>
-            <button type="button" class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+            <button type="button" class="signup-btn" onclick="window.location.href='signup.html';">Sign Up</button>
         </form>
     </div>
 </body>
