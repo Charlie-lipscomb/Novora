@@ -5,21 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novora Home Page</title>
     <style>
-        /* Basic reset for padding and margin */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #EDF8C7; /* original background color */
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Styling for the header */
         header {
             display: flex;
             justify-content: space-between;
@@ -28,19 +16,8 @@
             background-color: #f8f8f8;
         }
 
-        /* Styling for the logo */
-        .logo img {
-            height: 40px; /* Adjust based on your logo's size */
-        }
-
-        /* Styling for the nav items (search bar, basket button, and account button) */
-        .nav-items {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Space between items */
-        }
-
-        /* Styling for the search bar */
+        .nav-items { display: flex; align-items: center; gap: 15px; }
+        
         .search-bar {
             padding: 5px 10px;
             font-size: 14px;
@@ -48,8 +25,7 @@
             border-radius: 5px;
         }
 
-        /* Styling for the basket button */
-        .basket-btn {
+        .basket-btn, .account-btn {
             padding: 8px 16px;
             background-color: #333;
             color: white;
@@ -58,172 +34,128 @@
             cursor: pointer;
         }
 
-        /* Styling for the account button */
-        .account-btn {
-            padding: 8px 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Optional: Add hover effect */
-        .basket-btn:hover, .account-btn:hover {
-            background-color: #EDF8C7;
-        }
-
-        .search-bar:focus {
-            outline: none;
-            border-color: #007BFF;
-        }
+        .basket-btn:hover, .account-btn:hover { background-color: #EDF8C7; }
+        
+        .search-bar:focus { outline: none; border-color: #007BFF; }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 20px;
         }
 
         .product-card {
-            border: 2px solid #C28E00;
+            text-align: center;
+            border: 1px solid #ddd;
             padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            background-color: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background: white;
         }
 
-        .product-card img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .product-card h3 {
-            margin-top: 10px;
-        }
-
-        .product-card p {
-            color: #333;
-        }
-
-        /* Centered welcome message */
-        #welcomeMessage {
-            text-align: center;
-            margin-top: 20px;
-        }
+        .product-image img { width: 140px; cursor: pointer; }
     </style>
+
     <script>
-        // Function to get a cookie's value by name
+        // Function to get cookies
         function getCookie(name) {
-            let cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                let cookie = cookies[i].trim();
-                if (cookie.startsWith(name + "=")) {
-                    return cookie.substring(name.length + 1);
-                }
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
             }
             return null;
         }
 
-        // Function to check if the user is logged in
+        // Function to check login status and update Account button
         function checkLogin() {
-            const loggedInUser = getCookie("loggedInUser");
-            if (!loggedInUser) {
-                document.getElementById("accountBtn").innerHTML = "Login";
-                document.getElementById("accountBtn").setAttribute("onclick", "window.location.href='loginpage.html'");
+            let loggedIn = getCookie("loggedIn");
+            let accountBtn = document.getElementById("account-btn");
+
+            if (loggedIn === "true") {
+                accountBtn.innerText = "Account";
+                accountBtn.onclick = function () { window.location.href = 'account.html'; };
             } else {
-                document.getElementById("accountBtn").innerHTML = "Account";
-                document.getElementById("accountBtn").setAttribute("onclick", "window.location.href='account.html'");
-                document.getElementById("welcomeMessage").innerHTML = `Welcome, ${loggedInUser}!`;
+                accountBtn.innerText = "Login";
+                accountBtn.onclick = function () { window.location.href = 'loginpage.html'; };
             }
         }
+
+        // Run login check when page loads
+        document.addEventListener("DOMContentLoaded", checkLogin);
     </script>
 </head>
-<body onload="checkLogin()">
+<body>
     <header>
-        <div class="logo">
-            <img src="logo.png" alt="Novora Logo">
-        </div>
         <div class="nav-items">
             <input type="text" class="search-bar" placeholder="Search...">
             <button class="basket-btn">Basket</button>
-            <button class="account-btn" id="accountBtn">Login</button>
+            <button id="account-btn" class="account-btn">Account</button>
         </div>
     </header>
 
     <main>
-        <h2 id="welcomeMessage"></h2>
         <div class="product-grid">
             <!-- Product 1 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch1.png" alt="Product 1" width="140">
-                </div>
+                <div class="product-image"><img src="watch1.png" alt="Product 1" onclick="location.href='product1.html';"></div>
                 <h3>Product 1</h3>
                 <p>£10.00</p>
             </div>
+
             <!-- Product 2 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch2.png" alt="Product 2" width="140">
-                </div>
+                <div class="product-image"><img src="watch2.png" alt="Product 2" onclick="location.href='product2.html';"></div>
                 <h3>Product 2</h3>
                 <p>£15.00</p>
             </div>
+
             <!-- Product 3 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch3.png" alt="Product 3" width="140">
-                </div>
+                <div class="product-image"><img src="watch3.png" alt="Product 3" onclick="location.href='product3.html';"></div>
                 <h3>Product 3</h3>
                 <p>£20.00</p>
             </div>
+
             <!-- Product 4 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch4.png" alt="Product 4" width="140">
-                </div>
+                <div class="product-image"><img src="watch4.png" alt="Product 4" onclick="location.href='product4.html';"></div>
                 <h3>Product 4</h3>
                 <p>£25.00</p>
             </div>
+
             <!-- Product 5 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch5.png" alt="Product 5" width="140">
-                </div>
+                <div class="product-image"><img src="watch5.png" alt="Product 5" onclick="location.href='product5.html';"></div>
                 <h3>Product 5</h3>
                 <p>£30.00</p>
             </div>
+
             <!-- Product 6 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch6.png" alt="Product 6" width="140">
-                </div>
+                <div class="product-image"><img src="watch6.png" alt="Product 6" onclick="location.href='product6.html';"></div>
                 <h3>Product 6</h3>
                 <p>£35.00</p>
             </div>
+
             <!-- Product 7 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch7.png" alt="Product 7" width="140">
-                </div>
+                <div class="product-image"><img src="watch7.png" alt="Product 7" onclick="location.href='product7.html';"></div>
                 <h3>Product 7</h3>
                 <p>£40.00</p>
             </div>
+
             <!-- Product 8 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch8.png" alt="Product 8" width="140">
-                </div>
+                <div class="product-image"><img src="watch8.png" alt="Product 8" onclick="location.href='product8.html';"></div>
                 <h3>Product 8</h3>
                 <p>£45.00</p>
             </div>
+
             <!-- Product 9 -->
             <div class="product-card">
-                <div class="product-image">
-                    <img src="watch9.png" alt="Product 9" width="140">
-                </div>
+                <div class="product-image"><img src="watch9.png" alt="Product 9" onclick="location.href='product9.html';"></div>
                 <h3>Product 9</h3>
                 <p>£50.00</p>
             </div>
