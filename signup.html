@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
+    <title>Signup - Novora</title>
     <style>
-        /* Similar styles as before */
         body {
             display: flex;
             justify-content: center;
@@ -14,6 +13,7 @@
             background-color: #EDF8C7;
             margin: 0;
             padding: 20px;
+            font-family: Arial, sans-serif;
         }
         .centered-block {
             border: 2px solid #C28E00;
@@ -47,55 +47,43 @@
         .signup-btn:hover {
             background-color: #A37400;
         }
-        .login-btn {
+        .switch-btn {
             background-color: #ccc;
             color: black;
         }
-        .login-btn:hover {
-            background-color: #ccc;
-        }
     </style>
-    <script>
-        function signupUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-
-            // Simulate the signup (add actual validation logic as needed)
-            if (username && password) {
-                // Set a cookie for the username
-                document.cookie = `username=${username}; max-age=86400; path=/`;
-                window.location.href = "index.html";  // Redirect to home page
-            } else {
-                alert("Please fill out both fields!");
-            }
-        }
-
-        function redirectToLogin() {
-            window.location.href = "loginpage.html";
-        }
-    </script>
 </head>
 <body>
 
     <div class="centered-block">
-        <h2>Novora Signup Page</h2>
+        <h2>Novora Signup</h2>
         <form onsubmit="event.preventDefault(); signupUser();">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required placeholder="Enter your username">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
-            </div>
-            <div>
-                <button type="submit" class="signup-btn">Sign Up</button>
-            </div>
-            <div>
-                <button type="button" class="login-btn" onclick="redirectToLogin();">Login</button>
-            </div>
+            <input type="text" id="signup-username" required placeholder="Username">
+            <input type="email" id="signup-email" required placeholder="Email">
+            <input type="password" id="signup-password" required placeholder="Password">
+            <button type="submit" class="signup-btn">Sign Up</button>
         </form>
+        <button class="switch-btn" onclick="window.location.href='loginpage.html'">Go to Login</button>
     </div>
+
+    <script>
+        function signupUser() {
+            const username = document.getElementById("signup-username").value;
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+
+            if (localStorage.getItem(username)) {
+                alert("Username already exists. Please choose another.");
+                return;
+            }
+
+            const userData = { email, password };
+            localStorage.setItem(username, JSON.stringify(userData));
+
+            alert("Signup successful! Redirecting to login.");
+            window.location.href = "loginpage.html";
+        }
+    </script>
 
 </body>
 </html>
