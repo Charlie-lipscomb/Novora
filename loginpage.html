@@ -3,83 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #EDF8C7;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            background: white;
+            margin: 0;
             padding: 20px;
-            border-radius: 8px;
+        }
+        .centered-block {
+            border: 2px solid #C28E00;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            border-radius: 8px;
         }
         input {
-            display: block;
-            width: 90%;
-            margin: 10px auto;
+            width: calc(100% - 20px);
             padding: 10px;
-            font-size: 16px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
+            width: calc(100% - 20px);
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            margin: 10px;
         }
-        button:hover {
+        .login-btn {
+            background-color: #C28E00;
+            color: white;
+        }
+        .login-btn:hover {
             background-color: #A37400;
+        }
+        .switch-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        .switch-btn:hover {
+            background-color: #bbb;
         }
     </style>
     <script>
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
+        function loginUser(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (!username || !password) {
+                alert("Please enter both username and password.");
+                return;
             }
-            document.cookie = name + "=" + encodeURIComponent(value) + "; path=/" + expires;
+
+            document.cookie = `username=${username}; path=/`;
+            document.cookie = `password=${password}; path=/`;
+            window.location.href = "index.html";
         }
 
-        function getCookie(name) {
-            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-            return match ? decodeURIComponent(match[2]) : null;
+        function redirectToSignup() {
+            window.location.href = 'signup.html';
         }
-
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username && password) {
-                setCookie("username", username, 30); // Store for 30 days
-                setCookie("loggedIn", "true", 30);
-                window.location.href = "index.html"; // Redirect to homepage
-            } else {
-                alert("Please enter a valid username and password.");
-            }
-        }
-
-        window.onload = function () {
-            if (getCookie("loggedIn") === "true") {
-                window.location.href = "index.html"; // Redirect if already logged in
-            }
-        };
     </script>
 </head>
 <body>
-    <div class="container">
+
+    <div class="centered-block">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Login</button>
+        <form onsubmit="loginUser(event)">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" required placeholder="Enter your username">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter your password">
+            </div>
+            <div>
+                <button type="submit" class="login-btn">Login</button>
+            </div>
+            <div>
+                <button type="button" class="switch-btn" onclick="redirectToSignup();">Sign Up</button>
+            </div>
+        </form>
     </div>
+
 </body>
 </html>
