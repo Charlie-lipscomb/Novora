@@ -24,7 +24,6 @@
             align-items: center;
             padding: 10px 20px;
             background-color: #f8f8f8;
-            border-bottom: 2px solid #C28E00;
         }
 
         /* Styling for the logo */
@@ -69,7 +68,7 @@
 
         /* Optional: Add hover effect */
         .basket-btn:hover, .account-btn:hover {
-            background-color: #C28E00;
+            background-color: #EDF8C7;
         }
 
         .search-bar:focus {
@@ -77,7 +76,7 @@
             border-color: #007BFF;
         }
 
-        /* Styling for product grid */
+        /* Product Grid */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -85,148 +84,162 @@
             padding: 20px;
         }
 
+        /* Styling for product cards */
         .product-card {
+            background-color: white;
             border: 2px solid #C28E00;
             padding: 15px;
-            background: white;
             text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            cursor: pointer;
         }
 
-        .product-image img {
+        .product-card img {
             width: 100%;
-            height: auto;
-            max-width: 150px;
-            margin-bottom: 10px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 4px;
         }
 
-        h3 {
+        .product-card h3 {
+            margin-top: 10px;
             font-size: 16px;
-            margin-bottom: 10px;
         }
 
-        p {
+        .product-card p {
             font-size: 14px;
-            margin-bottom: 10px;
+            color: #333;
         }
+
     </style>
-    <script>
-        function checkLogin() {
-            let username = getCookie("username");
-            let accountBtn = document.getElementById("account-btn");
-
-            if (!username) {
-                accountBtn.textContent = "Login";
-                accountBtn.onclick = function() {
-                    window.location.href = "loginpage.html";
-                };
-            } else {
-                accountBtn.textContent = "Account";
-                accountBtn.onclick = function() {
-                    window.location.href = "account.html";
-                };
-            }
-        }
-
-        function getCookie(name) {
-            let cookies = document.cookie.split("; ");
-            for (let cookie of cookies) {
-                let [key, value] = cookie.split("=");
-                if (key === name) return value;
-            }
-            return null;
-        }
-
-        window.onload = checkLogin;
-    </script>
 </head>
 <body>
-
     <header>
+        <div class="logo">
+            <!-- Logo here -->
+        </div>
+
         <div class="nav-items">
             <input type="text" class="search-bar" placeholder="Search...">
             <button class="basket-btn">Basket</button>
-            <button class="account-btn" id="account-btn">Account</button>
+            <!-- Account button that behaves based on login status -->
+            <button class="account-btn" id="accountBtn" onclick="redirectToAccount()">Account</button>
         </div>
     </header>
 
     <main>
         <div class="product-grid">
             <!-- Product 1 -->
-            <div class="product-card" onclick="window.location.href='product1.html';">
-                <div class="product-image">
-                    <img src="watch1.png" alt="Product 1" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product1.html')">
+                <img src="watch1.png" alt="Product 1">
                 <h3>Product 1</h3>
                 <p>£10.00</p>
             </div>
             <!-- Product 2 -->
-            <div class="product-card" onclick="window.location.href='product2.html';">
-                <div class="product-image">
-                    <img src="watch2.png" alt="Product 2" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product2.html')">
+                <img src="watch2.png" alt="Product 2">
                 <h3>Product 2</h3>
                 <p>£15.00</p>
             </div>
             <!-- Product 3 -->
-            <div class="product-card" onclick="window.location.href='product3.html';">
-                <div class="product-image">
-                    <img src="watch3.png" alt="Product 3" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product3.html')">
+                <img src="watch3.png" alt="Product 3">
                 <h3>Product 3</h3>
                 <p>£20.00</p>
             </div>
             <!-- Product 4 -->
-            <div class="product-card" onclick="window.location.href='product4.html';">
-                <div class="product-image">
-                    <img src="watch4.png" alt="Product 4" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product4.html')">
+                <img src="watch4.png" alt="Product 4">
                 <h3>Product 4</h3>
                 <p>£25.00</p>
             </div>
             <!-- Product 5 -->
-            <div class="product-card" onclick="window.location.href='product5.html';">
-                <div class="product-image">
-                    <img src="watch5.png" alt="Product 5" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product5.html')">
+                <img src="watch5.png" alt="Product 5">
                 <h3>Product 5</h3>
                 <p>£30.00</p>
             </div>
             <!-- Product 6 -->
-            <div class="product-card" onclick="window.location.href='product6.html';">
-                <div class="product-image">
-                    <img src="watch6.png" alt="Product 6" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product6.html')">
+                <img src="watch6.png" alt="Product 6">
                 <h3>Product 6</h3>
                 <p>£35.00</p>
             </div>
             <!-- Product 7 -->
-            <div class="product-card" onclick="window.location.href='product7.html';">
-                <div class="product-image">
-                    <img src="watch7.png" alt="Product 7" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product7.html')">
+                <img src="watch7.png" alt="Product 7">
                 <h3>Product 7</h3>
                 <p>£40.00</p>
             </div>
             <!-- Product 8 -->
-            <div class="product-card" onclick="window.location.href='product8.html';">
-                <div class="product-image">
-                    <img src="watch8.png" alt="Product 8" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product8.html')">
+                <img src="watch8.png" alt="Product 8">
                 <h3>Product 8</h3>
                 <p>£45.00</p>
             </div>
             <!-- Product 9 -->
-            <div class="product-card" onclick="window.location.href='product9.html';">
-                <div class="product-image">
-                    <img src="watch9.png" alt="Product 9" width=140>
-                </div>
+            <div class="product-card" onclick="redirectToProduct('product9.html')">
+                <img src="watch9.png" alt="Product 9">
                 <h3>Product 9</h3>
                 <p>£50.00</p>
             </div>
         </div>
     </main>
 
+    <script>
+        // Check if user is logged in by checking for a cookie
+        window.onload = function() {
+            const loggedIn = getCookie("loggedIn");
+            if (loggedIn === "true") {
+                // If logged in, the account button should take you to account.html
+                document.getElementById("accountBtn").innerText = "Account";
+                document.getElementById("accountBtn").onclick = function() {
+                    window.location.href = "account.html";
+                };
+            } else {
+                // If not logged in, the account button should take you to loginpage.html
+                document.getElementById("accountBtn").innerText = "Login";
+                document.getElementById("accountBtn").onclick = function() {
+                    window.location.href = "loginpage.html";
+                };
+            }
+        };
+
+        // Redirect to the product page when a product is clicked
+        function redirectToProduct(productPage) {
+            window.location.href = productPage;
+        }
+
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Function to get a cookie by name
+        function getCookie(name) {
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookies = decodedCookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let c = cookies[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name + "=") == 0) {
+                    return c.substring(name.length + 1, c.length);
+                }
+            }
+            return "";
+        }
+
+        // Function to handle logout
+        function logout() {
+            setCookie("loggedIn", "false", -1); // Remove logged-in cookie
+            window.location.href = "index.html"; // Redirect to home page
+        }
+    </script>
 </body>
 </html>
