@@ -3,93 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>Account Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #EDF8C7;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            background: white;
+            margin: 0;
             padding: 20px;
-            border-radius: 8px;
+        }
+        .centered-block {
+            border: 2px solid #C28E00;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            text-align: center;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            border-radius: 8px;
         }
         .info {
             margin: 10px 0;
-            font-size: 18px;
-        }
-        #password {
-            display: inline-block;
-            letter-spacing: 3px;
         }
         button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
+            width: calc(100% - 20px);
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
+            margin: 10px;
         }
-        button:hover {
+        .logout-btn {
+            background-color: #C28E00;
+            color: white;
+        }
+        .logout-btn:hover {
             background-color: #A37400;
+        }
+        .toggle-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        .toggle-btn:hover {
+            background-color: #bbb;
         }
     </style>
     <script>
         function getCookie(name) {
-            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-            return match ? decodeURIComponent(match[2]) : null;
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                if (key === name) return value;
+            }
+            return null;
         }
 
-        function logout() {
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            window.location.href = "index.html"; // Redirect to home page
+        function displayAccountInfo() {
+            const username = getCookie("username") || "Not Set";
+            const email = getCookie("email") || "Not Set";
+            const password = getCookie("password") || "";
+
+            document.getElementById("username").innerText = username;
+            document.getElementById("email").innerText = email;
+            document.getElementById("password").value = password;
         }
 
         function togglePassword() {
-            let passwordField = document.getElementById("password");
-            let toggleButton = document.getElementById("togglePassword");
-            if (passwordField.textContent.includes("*")) {
-                passwordField.textContent = getCookie("password") || "Not Set";
-                toggleButton.textContent = "Hide Password";
+            const passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
             } else {
-                passwordField.textContent = "••••••••";
-                toggleButton.textContent = "Show Password";
+                passwordField.type = "password";
             }
         }
 
-        window.onload = function () {
-            let username = getCookie("username");
-            let password = getCookie("password");
+        function logoutUser() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "index.html";
+        }
 
-            if (username) {
-                document.getElementById("username").textContent = username;
-            } else {
-                document.getElementById("username").textContent = "Not Logged In";
-            }
-
-            if (password) {
-                document.getElementById("password").textContent = "••••••••";
-            } else {
-                document.getElementById("password").textContent = "Not Set";
-            }
-        };
+        window.onload = displayAccountInfo;
     </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Your Account</h2>
-        <div class="info">Username: <span id="username"></span></div>
-        <div class="info">Password: <span id="password"></span></div>
-        <button id="togglePassword" onclick="togglePassword()">Show Password</button>
-        <br>
-        <button onclick="logout()">Logout</button>
+
+    <div class="centered-block">
+        <h2>Account Info</h2>
+        <div class="info"><strong>Username:</strong> <span id="username"></span></div>
+        <div class="info"><strong>Email:</strong> <span id="email"></span></div>
+        <div class="info">
+            <strong>Password:</strong>
+            <input type="password" id="password" readonly>
+            <button class="toggle-btn" onclick="togglePassword();">Show Password</button>
+        </div>
+        <div>
+            <button class="logout-btn" onclick="logoutUser();">Logout</button>
+        </div>
     </div>
+
 </body>
 </html>
