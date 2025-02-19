@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-bar {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .basket-btn, .account-btn {
+            padding: 8px 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            width: 140px;
+            text-align: center;
+        }
+
+        .product-image img {
+            width: 100%;
+        }
+
+        .product-card h3, .product-card p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-items">
+            <input type="text" class="search-bar" placeholder="Search..." disabled>
+            <button class="basket-btn">Basket</button>
+            <button class="account-btn" onclick="checkLogin();">Account</button>
+        </div>
+    </header>
+
+    <main>
+        <h2>Search Results</h2>
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <script>
+        function checkLogin() {
+            const username = getCookie("username");
+            if (username) {
+                window.location.href = 'account.html';
+            } else {
+                window.location.href = 'loginpage.html';
+            }
+        }
+
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                if (key === name) return decodeURIComponent(value);
+            }
+            return null;
+        }
+
+        const products = [
+            { name: "Product 1", price: "£10.00", link: "product1.html" },
+            { name: "Product 2", price: "£15.00", link: "product2.html" },
+            { name: "Product 3", price: "£20.00", link: "product3.html" },
+            { name: "Product 4", price: "£25.00", link: "product4.html" },
+            // Add more products as necessary
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query').toLowerCase();
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
+
+        const productGrid = document.getElementById('productGrid');
+
+        filteredProducts.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+
+            productCard.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.link.replace('.html', '.png')}" alt="${product.name}">
+                </div>
+                <h3>${product.name}</h3>
+                <p>${product.price}</p>
+                <a href="${product.link}">View</a>
+            `;
+
+            productGrid.appendChild(productCard);
+        });
+    </script>
+
+</body>
+</html>
