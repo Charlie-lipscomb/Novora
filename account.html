@@ -49,13 +49,20 @@
         .toggle-btn:hover {
             background-color: #bbb;
         }
+        .home-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .home-btn:hover {
+            background-color: #3E8E41;
+        }
     </style>
     <script>
         function getCookie(name) {
             const cookies = document.cookie.split('; ');
             for (let cookie of cookies) {
                 let [key, value] = cookie.split('=');
-                if (key === name) return value;
+                if (key === name) return decodeURIComponent(value);
             }
             return null;
         }
@@ -72,10 +79,13 @@
 
         function togglePassword() {
             const passwordField = document.getElementById("password");
+            const toggleButton = document.getElementById("togglePasswordBtn");
             if (passwordField.type === "password") {
                 passwordField.type = "text";
+                toggleButton.innerText = "Hide Password";
             } else {
                 passwordField.type = "password";
+                toggleButton.innerText = "Show Password";
             }
         }
 
@@ -98,9 +108,10 @@
         <div class="info">
             <strong>Password:</strong>
             <input type="password" id="password" readonly>
-            <button class="toggle-btn" onclick="togglePassword();">Show Password</button>
+            <button id="togglePasswordBtn" class="toggle-btn" onclick="togglePassword();">Show Password</button>
         </div>
         <div>
+            <button class="home-btn" onclick="window.location.href='index.html';">Home</button>
             <button class="logout-btn" onclick="logoutUser();">Logout</button>
         </div>
     </div>
