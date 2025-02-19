@@ -119,7 +119,7 @@
     <main>
         <h1 style="text-align:center; margin-top: 20px;">Search Results</h1>
         <div class="product-grid" id="productGrid">
-            <!-- Products will be populated dynamically here -->
+            <!-- All products will be populated initially -->
         </div>
     </main>
 
@@ -142,82 +142,73 @@
             return null;
         }
 
-        document.getElementById('searchBar').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                const query = this.value.toLowerCase();
-                if (query) {
-                    // Perform search based on the query (mock search here)
-                    displaySearchResults(query);
-                }
+        document.getElementById('searchBar').addEventListener('input', function(event) {
+            const query = this.value.toLowerCase();
+            if (query) {
+                displaySearchResults(query);
+            } else {
+                displayAllProducts();
             }
         });
 
-        function displaySearchResults(query) {
+        function displayAllProducts() {
             const products = [
-                [  
-				{ name: 'Product 1', price: '£100.00', img: 'watch1.png', link: 'product1.html' },  
-				{ name: 'Product 2', price: '£105.00', img: 'watch2.png', link: 'product2.html' },  
-				{ name: 'Product 3', price: '£110.00', img: 'watch3.png', link: 'product3.html' },  
-				{ name: 'Product 4', price: '£115.00', img: 'watch4.png', link: 'product4.html' },  
-				{ name: 'Product 5', price: '£120.00', img: 'watch5.png', link: 'product5.html' },  
-				{ name: 'Product 6', price: '£125.00', img: 'watch6.png', link: 'product6.html' },  
-				{ name: 'Product 7', price: '£130.00', img: 'watch7.png', link: 'product7.html' },  
-				{ name: 'Product 8', price: '£135.00', img: 'watch8.png', link: 'product8.html' },  
-				{ name: 'Product 9', price: '£140.00', img: 'watch9.png', link: 'product9.html' },  
-				{ name: 'Product 10', price: '£145.00', img: 'watch10.png', link: 'product10.html' },  
-				{ name: 'Product 11', price: '£150.00', img: 'watch11.png', link: 'product11.html' },  
-				{ name: 'Product 12', price: '£155.00', img: 'watch12.png', link: 'product12.html' },  
-				{ name: 'Product 13', price: '£160.00', img: 'watch13.png', link: 'product13.html' },  
-				{ name: 'Product 14', price: '£165.00', img: 'watch14.png', link: 'product14.html' },  
-				{ name: 'Product 15', price: '£170.00', img: 'watch15.png', link: 'product15.html' },  
-				{ name: 'Product 16', price: '£175.00', img: 'watch16.png', link: 'product16.html' },  
-				{ name: 'Product 17', price: '£180.00', img: 'watch17.png', link: 'product17.html' },  
-				{ name: 'Product 18', price: '£185.00', img: 'watch18.png', link: 'product18.html' },  
-				{ name: 'Product 19', price: '£190.00', img: 'watch19.png', link: 'product19.html' },  
-				{ name: 'Product 20', price: '£195.00', img: 'watch20.png', link: 'product20.html' },  
-				{ name: 'Product 21', price: '£200.00', img: 'watch21.png', link: 'product21.html' },  
-				{ name: 'Product 22', price: '£205.00', img: 'watch22.png', link: 'product22.html' },  
-				{ name: 'Product 23', price: '£210.00', img: 'watch23.png', link: 'product23.html' },  
-				{ name: 'Product 24', price: '£215.00', img: 'watch24.png', link: 'product24.html' },  
-				{ name: 'Product 25', price: '£330.00', img: 'watch25.png', link: 'product25.html' },  
-				{ name: 'Product 26', price: '£220.00', img: 'watch26.png', link: 'product26.html' },  
-				{ name: 'Product 27', price: '£225.00', img: 'watch27.png', link: 'product27.html' },  
-				{ name: 'Product 28', price: '£230.00', img: 'watch28.png', link: 'product28.html' },  
-				{ name: 'Product 29', price: '£235.00', img: 'watch29.png', link: 'product29.html' },  
-				{ name: 'Product 30', price: '£240.00', img: 'watch30.png', link: 'product30.html' },  
-				{ name: 'Product 31', price: '£245.00', img: 'watch31.png', link: 'product31.html' },  
-				{ name: 'Product 32', price: '£250.00', img: 'watch32.png', link: 'product32.html' },  
-				{ name: 'Product 33', price: '£255.00', img: 'watch33.png', link: 'product33.html' },  
-				{ name: 'Product 34', price: '£260.00', img: 'watch34.png', link: 'product34.html' },  
-				{ name: 'Product 35', price: '£265.00', img: 'watch35.png', link: 'product35.html' },  
-				{ name: 'Product 36', price: '£270.00', img: 'watch36.png', link: 'product36.html' },  
-				{ name: 'Product 37', price: '£275.00', img: 'watch37.png', link: 'product37.html' },  
-				{ name: 'Product 38', price: '£280.00', img: 'watch38.png', link: 'product38.html' },  
-				{ name: 'Product 39', price: '£285.00', img: 'watch39.png', link: 'product39.html' },  
-				{ name: 'Product 40', price: '£290.00', img: 'watch40.png', link: 'product40.html' },  
-				{ name: 'Product 41', price: '£295.00', img: 'watch41.png', link: 'product41.html' },  
-				{ name: 'Product 42', price: '£300.00', img: 'watch42.png', link: 'product42.html' },  
-				{ name: 'Product 43', price: '£305.00', img: 'watch43.png', link: 'product43.html' },  
-				{ name: 'Product 44', price: '£310.00', img: 'watch44.png', link: 'product44.html' },  
-				{ name: 'Product 45', price: '£315.00', img: 'watch45.png', link: 'product45.html' },  
-				{ name: 'Product 46', price: '£320.00', img: 'watch46.png', link: 'product46.html' },  
-				{ name: 'Product 47', price: '£325.00', img: 'watch47.png', link: 'product47.html' },  
-				{ name: 'Product 48', price: '£330.00', img: 'watch48.png', link: 'product48.html' },  
-				{ name: 'Product 49', price: '£335.00', img: 'watch49.png', link: 'product49.html' },  
-				{ name: 'Product 50', price: '£340.00', img: 'watch50.png', link: 'product50.html' }  
+                { name: 'Product 1', price: '£100.00', img: 'watch1.png', link: 'product1.html' },
+                { name: 'Product 2', price: '£105.00', img: 'watch2.png', link: 'product2.html' },
+                { name: 'Product 3', price: '£110.00', img: 'watch3.png', link: 'product3.html' },
+                { name: 'Product 4', price: '£115.00', img: 'watch4.png', link: 'product4.html' },
+                { name: 'Product 5', price: '£120.00', img: 'watch5.png', link: 'product5.html' },
+                { name: 'Product 6', price: '£125.00', img: 'watch6.png', link: 'product6.html' },
+                { name: 'Product 7', price: '£130.00', img: 'watch7.png', link: 'product7.html' },
+                { name: 'Product 8', price: '£135.00', img: 'watch8.png', link: 'product8.html' },
+                { name: 'Product 9', price: '£140.00', img: 'watch9.png', link: 'product9.html' },
+                { name: 'Product 10', price: '£145.00', img: 'watch10.png', link: 'product10.html' },
+                { name: 'Product 11', price: '£150.00', img: 'watch11.png', link: 'product11.html' },
+                { name: 'Product 12', price: '£155.00', img: 'watch12.png', link: 'product12.html' },
+                { name: 'Product 13', price: '£160.00', img: 'watch13.png', link: 'product13.html' },
+                { name: 'Product 14', price: '£165.00', img: 'watch14.png', link: 'product14.html' },
+                { name: 'Product 15', price: '£170.00', img: 'watch15.png', link: 'product15.html' },
+                { name: 'Product 16', price: '£175.00', img: 'watch16.png', link: 'product16.html' },
+                { name: 'Product 17', price: '£180.00', img: 'watch17.png', link: 'product17.html' },
+                { name: 'Product 18', price: '£185.00', img: 'watch18.png', link: 'product18.html' },
+                { name: 'Product 19', price: '£190.00', img: 'watch19.png', link: 'product19.html' },
+                { name: 'Product 20', price: '£195.00', img: 'watch20.png', link: 'product20.html' },
+                { name: 'Product 21', price: '£200.00', img: 'watch21.png', link: 'product21.html' },
+                { name: 'Product 22', price: '£205.00', img: 'watch22.png', link: 'product22.html' },
+                { name: 'Product 23', price: '£210.00', img: 'watch23.png', link: 'product23.html' },
+                { name: 'Product 24', price: '£215.00', img: 'watch24.png', link: 'product24.html' },
+                { name: 'Product 25', price: '£330.00', img: 'watch25.png', link: 'product25.html' },
+                { name: 'Product 26', price: '£220.00', img: 'watch26.png', link: 'product26.html' },
+                { name: 'Product 27', price: '£225.00', img: 'watch27.png', link: 'product27.html' },
+                { name: 'Product 28', price: '£230.00', img: 'watch28.png', link: 'product28.html' },
+                { name: 'Product 29', price: '£235.00', img: 'watch29.png', link: 'product29.html' },
+                { name: 'Product 30', price: '£240.00', img: 'watch30.png', link: 'product30.html' },
+                { name: 'Product 31', price: '£245.00', img: 'watch31.png', link: 'product31.html' },
+                { name: 'Product 32', price: '£250.00', img: 'watch32.png', link: 'product32.html' },
+                { name: 'Product 33', price: '£255.00', img: 'watch33.png', link: 'product33.html' },
+                { name: 'Product 34', price: '£260.00', img: 'watch34.png', link: 'product34.html' },
+                { name: 'Product 35', price: '£265.00', img: 'watch35.png', link: 'product35.html' },
+                { name: 'Product 36', price: '£270.00', img: 'watch36.png', link: 'product36.html' },
+                { name: 'Product 37', price: '£275.00', img: 'watch37.png', link: 'product37.html' },
+                { name: 'Product 38', price: '£280.00', img: 'watch38.png', link: 'product38.html' },
+                { name: 'Product 39', price: '£285.00', img: 'watch39.png', link: 'product39.html' },
+                { name: 'Product 40', price: '£290.00', img: 'watch40.png', link: 'product40.html' },
+                { name: 'Product 41', price: '£295.00', img: 'watch41.png', link: 'product41.html' },
+                { name: 'Product 42', price: '£300.00', img: 'watch42.png', link: 'product42.html' },
+                { name: 'Product 43', price: '£305.00', img: 'watch43.png', link: 'product43.html' },
+                { name: 'Product 44', price: '£310.00', img: 'watch44.png', link: 'product44.html' },
+                { name: 'Product 45', price: '£315.00', img: 'watch45.png', link: 'product45.html' },
+                { name: 'Product 46', price: '£320.00', img: 'watch46.png', link: 'product46.html' },
+                { name: 'Product 47', price: '£325.00', img: 'watch47.png', link: 'product47.html' },
+                { name: 'Product 48', price: '£330.00', img: 'watch48.png', link: 'product48.html' },
+                { name: 'Product 49', price: '£335.00', img: 'watch49.png', link: 'product49.html' },
+                { name: 'Product 50', price: '£340.00', img: 'watch50.png', link: 'product50.html' }
             ];
 
-            // Filter products based on the search query
-            const filteredProducts = products.filter(product =>
-                product.name.toLowerCase().includes(query) || 
-                product.price.toLowerCase().includes(query)
-            );
-
             const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = ''; // Clear previous search results
+            productGrid.innerHTML = ''; // Clear previous products
 
-            // Display the filtered products
-            filteredProducts.forEach(product => {
+            products.forEach(product => {
                 const productCard = `
                     <div class="product-card">
                         <div class="product-image">
@@ -230,11 +221,87 @@
                 `;
                 productGrid.innerHTML += productCard;
             });
-
-            if (filteredProducts.length === 0) {
-                productGrid.innerHTML = '<p style="text-align:center; color:red;">No products found</p>';
-            }
         }
+
+        function displaySearchResults(query) {
+            const products = [
+                { name: 'Product 1', price: '£100.00', img: 'watch1.png', link: 'product1.html' },
+                { name: 'Product 2', price: '£105.00', img: 'watch2.png', link: 'product2.html' },
+                { name: 'Product 3', price: '£110.00', img: 'watch3.png', link: 'product3.html' },
+                { name: 'Product 4', price: '£115.00', img: 'watch4.png', link: 'product4.html' },
+                { name: 'Product 5', price: '£120.00', img: 'watch5.png', link: 'product5.html' },
+                { name: 'Product 6', price: '£125.00', img: 'watch6.png', link: 'product6.html' },
+                { name: 'Product 7', price: '£130.00', img: 'watch7.png', link: 'product7.html' },
+                { name: 'Product 8', price: '£135.00', img: 'watch8.png', link: 'product8.html' },
+                { name: 'Product 9', price: '£140.00', img: 'watch9.png', link: 'product9.html' },
+                { name: 'Product 10', price: '£145.00', img: 'watch10.png', link: 'product10.html' },
+                { name: 'Product 11', price: '£150.00', img: 'watch11.png', link: 'product11.html' },
+                { name: 'Product 12', price: '£155.00', img: 'watch12.png', link: 'product12.html' },
+                { name: 'Product 13', price: '£160.00', img: 'watch13.png', link: 'product13.html' },
+                { name: 'Product 14', price: '£165.00', img: 'watch14.png', link: 'product14.html' },
+                { name: 'Product 15', price: '£170.00', img: 'watch15.png', link: 'product15.html' },
+                { name: 'Product 16', price: '£175.00', img: 'watch16.png', link: 'product16.html' },
+                { name: 'Product 17', price: '£180.00', img: 'watch17.png', link: 'product17.html' },
+                { name: 'Product 18', price: '£185.00', img: 'watch18.png', link: 'product18.html' },
+                { name: 'Product 19', price: '£190.00', img: 'watch19.png', link: 'product19.html' },
+                { name: 'Product 20', price: '£195.00', img: 'watch20.png', link: 'product20.html' },
+                { name: 'Product 21', price: '£200.00', img: 'watch21.png', link: 'product21.html' },
+                { name: 'Product 22', price: '£205.00', img: 'watch22.png', link: 'product22.html' },
+                { name: 'Product 23', price: '£210.00', img: 'watch23.png', link: 'product23.html' },
+                { name: 'Product 24', price: '£215.00', img: 'watch24.png', link: 'product24.html' },
+                { name: 'Product 25', price: '£330.00', img: 'watch25.png', link: 'product25.html' },
+                { name: 'Product 26', price: '£220.00', img: 'watch26.png', link: 'product26.html' },
+                { name: 'Product 27', price: '£225.00', img: 'watch27.png', link: 'product27.html' },
+                { name: 'Product 28', price: '£230.00', img: 'watch28.png', link: 'product28.html' },
+                { name: 'Product 29', price: '£235.00', img: 'watch29.png', link: 'product29.html' },
+                { name: 'Product 30', price: '£240.00', img: 'watch30.png', link: 'product30.html' },
+                { name: 'Product 31', price: '£245.00', img: 'watch31.png', link: 'product31.html' },
+                { name: 'Product 32', price: '£250.00', img: 'watch32.png', link: 'product32.html' },
+                { name: 'Product 33', price: '£255.00', img: 'watch33.png', link: 'product33.html' },
+                { name: 'Product 34', price: '£260.00', img: 'watch34.png', link: 'product34.html' },
+                { name: 'Product 35', price: '£265.00', img: 'watch35.png', link: 'product35.html' },
+                { name: 'Product 36', price: '£270.00', img: 'watch36.png', link: 'product36.html' },
+                { name: 'Product 37', price: '£275.00', img: 'watch37.png', link: 'product37.html' },
+                { name: 'Product 38', price: '£280.00', img: 'watch38.png', link: 'product38.html' },
+                { name: 'Product 39', price: '£285.00', img: 'watch39.png', link: 'product39.html' },
+                { name: 'Product 40', price: '£290.00', img: 'watch40.png', link: 'product40.html' },
+                { name: 'Product 41', price: '£295.00', img: 'watch41.png', link: 'product41.html' },
+                { name: 'Product 42', price: '£300.00', img: 'watch42.png', link: 'product42.html' },
+                { name: 'Product 43', price: '£305.00', img: 'watch43.png', link: 'product43.html' },
+                { name: 'Product 44', price: '£310.00', img: 'watch44.png', link: 'product44.html' },
+                { name: 'Product 45', price: '£315.00', img: 'watch45.png', link: 'product45.html' },
+                { name: 'Product 46', price: '£320.00', img: 'watch46.png', link: 'product46.html' },
+                { name: 'Product 47', price: '£325.00', img: 'watch47.png', link: 'product47.html' },
+                { name: 'Product 48', price: '£330.00', img: 'watch48.png', link: 'product48.html' },
+                { name: 'Product 49', price: '£335.00', img: 'watch49.png', link: 'product49.html' },
+                { name: 'Product 50', price: '£340.00', img: 'watch50.png', link: 'product50.html' }
+            ];
+
+            const searchResults = products.filter(product =>
+                product.name.toLowerCase().includes(query) ||
+                product.price.toLowerCase().includes(query)
+            );
+
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = ''; // Clear previous search results
+
+            searchResults.forEach(product => {
+                const productCard = `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.img}" alt="${product.name}">
+                        </div>
+                        <h3>${product.name}</h3>
+                        <p>${product.price}</p>
+                        <a href="${product.link}">View</a>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+        }
+
+        // Display all products by default
+        displayAllProducts();
     </script>
 
 </body>
