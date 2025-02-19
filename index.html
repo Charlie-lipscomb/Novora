@@ -114,12 +114,16 @@
     <script>
         function checkLogin() {
             let username = getCookie("username");
+            let accountBtn = document.getElementById("account-btn");
+
             if (!username) {
-                document.getElementById("account-btn").onclick = function() {
+                accountBtn.textContent = "Login";
+                accountBtn.onclick = function() {
                     window.location.href = "loginpage.html";
                 };
             } else {
-                document.getElementById("account-btn").onclick = function() {
+                accountBtn.textContent = "Account";
+                accountBtn.onclick = function() {
                     window.location.href = "account.html";
                 };
             }
