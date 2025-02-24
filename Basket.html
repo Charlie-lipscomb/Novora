@@ -107,7 +107,37 @@
         <h2>Your Basket</h2>
         <div id="basket-container"></div>
         <p id="empty-message" class="empty-message">Your basket is empty.</p>
-        <button id="checkout-button" class="checkout-button" style="display: none;">Proceed to Checkout</button>
+        <button id="checkout-button" class="checkout-button" style="display: none;" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+
+<script>
+  // Simulate the basket items
+  // In a real-world scenario, you will fetch this from localStorage or an API
+  const basketItems = JSON.parse(localStorage.getItem('basket')) || [];
+
+  const container = document.getElementById('basket-container');
+  const checkoutButton = document.getElementById('checkout-button');
+
+  if (basketItems.length > 0) {
+    // Show the checkout button
+    checkoutButton.style.display = 'inline-block';
+
+    basketItems.forEach(item => {
+      const productItem = document.createElement('div');
+      productItem.classList.add('product-item');
+      
+      productItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="product-item-details">
+          <p class="product-item-name">${item.name}</p>
+          <p class="product-item-price">${item.price}</p>
+        </div>
+      `;
+      container.appendChild(productItem);
+    });
+  } else {
+    container.innerHTML = `<p>Your basket is empty. Add items to your basket to proceed.</p>`;
+  }
+</script>
     </div>
 
     <script>
