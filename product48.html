@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Necklace Chain</h3>
       <p>This sleek and timeless silver necklace chain is crafted from high-quality sterling silver, offering a polished and elegant look. Its versatile design makes it perfect for wearing alone or pairing with your favorite pendant. Lightweight yet durable, this chain is a must-have addition to any jewelry collection.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
