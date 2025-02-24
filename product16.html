@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Sapphire Earings</h3>
       <p>These elegant sapphire earrings feature deep blue sapphires set in a luxurious gold or silver setting. Their timeless design highlights the natural brilliance of the gemstones, making them perfect for both everyday wear and special occasions. A symbol of elegance and sophistication, these earrings are a stunning addition to any jewelry collection.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
