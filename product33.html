@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Emerald Choker</h3>
       <p>An exquisite Emerald Choker adorned with numerous small, vibrant emeralds, creating a dazzling and luxurious look. The rich green gemstones are carefully set to enhance their brilliance, making this choker a statement piece perfect for elegant occasions.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
