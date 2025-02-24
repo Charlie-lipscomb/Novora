@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Emerald Necklace</h3>
       <p>This elegant emerald necklace showcases a stunning deep green emerald gemstone, beautifully set in a delicate gold or silver chain. The rich color of the emerald exudes sophistication, while its timeless design makes it perfect for both special occasions and everyday wear. A symbol of elegance and luxury, this necklace is a must-have for any jewelry collection.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
