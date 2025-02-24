@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Blue Rolex Watch</h3>
       <p>The Blue Rolex Watch showcases the brand’s signature elegance with a stunning blue dial that exudes both luxury and refinement. The deep blue face is complemented by luminous markers and the iconic Rolex crown at 12 o’clock. Set in a polished stainless steel case, this timepiece offers both durability and sophistication. Whether worn casually or at formal events, the Rolex Blue Watch’s timeless design makes it a perfect accessory for any occasion. Powered by a precise Swiss automatic movement, it combines style with reliability, truly embodying the excellence Rolex is known for.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
