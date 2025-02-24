@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Patek Phillipe Watch</h3>
       <p>The blue Patek Philippe watch is a stunning example of luxury and precision. With its deep blue dial, elegantly paired with silver-toned markers and hands, this timepiece exudes a sophisticated, understated charm. Known for its exceptional craftsmanship, it features a self-winding movement and a durable stainless steel case. The combination of sleek design and reliable functionality makes this Patek Philippe watch an ideal choice for those who value both tradition and innovation in horology. Perfect for any formal occasion or discerning watch enthusiast.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
