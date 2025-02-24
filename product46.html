@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Frederique Constant</h3>
       <p>Frederique Constant watches are known for their timeless elegance and precision craftsmanship. Combining classic Swiss watchmaking with modern innovation, they feature sophisticated designs, high-quality materials, and reliable automatic or quartz movements. Perfect for those who appreciate luxury with a refined touch.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>a>
     </div>
   </div>
 
