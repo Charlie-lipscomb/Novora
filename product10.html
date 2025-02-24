@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Red Arrows Watch</h3>
       <p>The Red Arrows Watch is a tribute to precision and performance, inspired by the renowned aerobatic team. Featuring a bold design with a striking red dial and contrasting white hands, this timepiece embodies the spirit of speed and excellence. The watch is equipped with a durable stainless steel case and a precision quartz movement, ensuring reliable accuracy. Its unique design, including the Red Arrows logo on the dial, makes it a must-have for aviation enthusiasts and watch collectors alike. Whether for everyday wear or special occasions, it stands out with both style and functionality.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
