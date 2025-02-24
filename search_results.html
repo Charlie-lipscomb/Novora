@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>Novora Home Page</title>
     <style>
         * {
             margin: 0;
@@ -111,13 +111,15 @@
     <header>
         <div class="nav-items">
             <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
-            <button class="basket-btn">Basket</button>
+            <a href="Basket.html">
+  				<button class="basket-btn">Basket</button>
+			</a>
             <button class="account-btn" onclick="checkLogin();">Account</button>
         </div>
     </header>
 
     <main>
-        <h1 style="text-align:center; margin-top: 20px;">Search Results</h1>
+        <h1 style="text-align:center; margin-top: 20px;">/h1>
         <div class="product-grid" id="productGrid">
             <!-- All products will be populated initially -->
         </div>
