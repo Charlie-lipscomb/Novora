@@ -103,6 +103,19 @@
     <div class="product-details">
       <h3>Brown Breitling Watch</h3>
       <p>The brown Breitling watch features a rich, deep brown dial with contrasting markers and subdials, exuding a classic and sophisticated look. Encased in high-quality stainless steel, it combines both durability and elegance. The chronograph function adds a touch of precision, while the robust design ensures it’s as functional as it is stylish. Perfect for those who appreciate a refined, timeless aesthetic, this Breitling watch is ideal for both casual and formal occasions.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
