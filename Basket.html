@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EDF8C7;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #C28E00;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #C28E00;
+        }
+
+        .basket-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #C28E00;
+        }
+
+        .basket-item img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .basket-details {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .basket-details h3 {
+            font-size: 1.5em;
+            color: #C28E00;
+        }
+
+        .basket-details p {
+            font-size: 1em;
+            color: #333;
+        }
+
+        .remove-button {
+            padding: 8px 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: darkred;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #C28E00;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #C28E00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .checkout-button:hover {
+            background-color: #A47A00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Your Basket</h2>
+        <div id="basket-container"></div>
+        <p id="empty-message" class="empty-message">Your basket is empty.</p>
+        <button id="checkout-button" class="checkout-button" style="display: none;">Proceed to Checkout</button>
+    </div>
+
+    <script>
+        function loadBasket() {
+            let basket = JSON.parse(localStorage.getItem("basket")) || [];
+            let container = document.getElementById("basket-container");
+            let emptyMessage = document.getElementById("empty-message");
+            let checkoutButton = document.getElementById("checkout-button");
+
+            container.innerHTML = "";
+
+            if (basket.length === 0) {
+                emptyMessage.style.display = "block";
+                checkoutButton.style.display = "none";
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+            checkoutButton.style.display = "block";
+
+            basket.forEach((item, index) => {
+                let div = document.createElement("div");
+                div.classList.add("basket-item");
+
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="basket-details">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                    <button class="remove-button" onclick="removeItem(${index})">Remove</button>
+                `;
+
+                container.appendChild(div);
+            });
+        }
+
+        function removeItem(index) {
+            let basket = JSON.parse(localStorage.getItem("basket")) || [];
+            basket.splice(index, 1);
+            localStorage.setItem("basket", JSON.stringify(basket));
+            loadBasket();
+        }
+
+        document.getElementById("checkout-button").addEventListener("click", function() {
+            alert("Proceeding to checkout...");
+        });
+
+        loadBasket();
+    </script>
+
+</body>
+</html>
