@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #EDF8C7;
+      padding: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #C28E00;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 2px solid #C28E00;
+    }
+
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .product-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+
+    .product-item-details {
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .product-item-name {
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    .product-item-price {
+      color: #C28E00;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"], input[type="email"], input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #C28E00;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #C28E00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .checkout-btn:hover {
+      background-color: #A47A00;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 16px;
+      color: #333;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Checkout</h2>
+
+  <div class="container" id="basket-container">
+    <!-- Dynamically populated products go here -->
+  </div>
+
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Enter your full name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Shipping Address</label>
+    <input type="text" id="address" placeholder="Enter your shipping address" required>
+  </div>
+
+  <div class="form-group">
+    <label for="credit-card">Credit Card Number</label>
+    <input type="number" id="credit-card" placeholder="Enter your credit card number" required>
+  </div>
+
+  <div class="form-group">
+    <button class="checkout-btn">Proceed to Payment</button>
+  </div>
+
+  <footer>
+    <p>Thank you for shopping with us!</p>
+  </footer>
+
+  <script>
+    // Simulate the basket items
+    // In a real-world scenario, you will fetch this from localStorage or an API
+    const basketItems = JSON.parse(localStorage.getItem('basket')) || [];
+
+    const container = document.getElementById('basket-container');
+
+    if (basketItems.length > 0) {
+      basketItems.forEach(item => {
+        const productItem = document.createElement('div');
+        productItem.classList.add('product-item');
+        
+        productItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="product-item-details">
+            <p class="product-item-name">${item.name}</p>
+            <p class="product-item-price">${item.price}</p>
+          </div>
+        `;
+        container.appendChild(productItem);
+      });
+    } else {
+      container.innerHTML = `<p>Your basket is empty. Add items to your basket to proceed.</p>`;
+    }
+  </script>
+
+</body>
+</html>
