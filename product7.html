@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Green Breitling Watch</h3>
       <p>The Green Breitling Watch features a bold, vibrant green dial that makes a striking statement while retaining the brand’s renowned sophistication. Its polished stainless steel case and sturdy design exude both elegance and durability. The watch is powered by a Swiss automatic movement, ensuring precise timekeeping, while the luminous markers and hands provide clear readability even in low light. Whether worn for a casual day out or a special occasion, this green timepiece combines luxury and performance, making it an exceptional addition to any collection.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
