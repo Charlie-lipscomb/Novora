@@ -103,7 +103,20 @@
     <div class="product-details">
       <h3>Blue and Gold Rolex Watch</h3>
       <p>The Blue and Gold Rolex Watch showcases a luxurious blend of vibrant blue and rich gold accents, making it an eye-catching timepiece. Its stunning blue dial is complemented by the classic gold hour markers and hands, adding a sense of elegance and refinement. The 18k gold bezel and bracelet elevate its prestigious feel, while the Swiss automatic movement ensures precision and reliability. A true symbol of luxury, this watch is perfect for those who desire both style and performance, making it an iconic addition to any collection.</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
+
+<script>
+    function addToBasket() {
+        let name = document.querySelector("h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        basket.push({ name, image, description });
+        localStorage.setItem("basket", JSON.stringify(basket));
+        alert(name + " has been added to your basket!");
+    }
+</script>
     </div>
   </div>
 
