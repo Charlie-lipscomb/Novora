@@ -134,8 +134,10 @@
 
         alert(name + " has been added to your basket!");
 
-        // Redirect to index.html after adding to basket
-        window.location.href = "index.html";
+        // Use setTimeout to ensure alert is seen before redirection
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 500); // Redirect after 0.5 seconds
     }
 </script>
     </div>
