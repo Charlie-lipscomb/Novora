@@ -89,11 +89,26 @@
       font-size: 16px;
       color: #333;
     }
+    
+    .home-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #C28E00;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .home-button:hover {
+      background-color: #A47A00;
+    }
 
   </style>
 </head>
 <body>
-
+  <a href="index.html" class="home-button">Home</a>
 
   <div class="container">
     <div class="product-image">
@@ -106,22 +121,35 @@
       <h3>£2,500</h3>
       <a href="#" class="buy-button" onclick="addToBasket()">Add to Basket</a>
 
-<script>
-    function addToBasket() {
-        let name = document.querySelector("h3").innerText;
-        let image = document.querySelector(".product-image img").src;
-        let description = document.querySelector(".product-details p").innerText;
-
-        let basket = JSON.parse(localStorage.getItem("basket")) || [];
-        basket.push({ name, image, description });
-        localStorage.setItem("basket", JSON.stringify(basket));
-        alert(name + " has been added to your basket!");
-    }
-</script>
     </div>
   </div>
 
+<script>
+    function addToBasket() {
+        // Retrieve product details
+        let name = document.querySelector(".product-details h3").innerText;
+        let image = document.querySelector(".product-image img").src;
+        let description = document.querySelector(".product-details p").innerText;
+        let price = document.querySelector(".product-details h3:nth-of-type(2)").innerText;  // Price is in the second <h3> element
 
+        // Get the basket from localStorage, or initialize an empty array if no basket exists
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+        
+        // Add the new product to the basket
+        basket.push({ name, image, description, price });
+
+        // Save the updated basket back to localStorage
+        localStorage.setItem("basket", JSON.stringify(basket));
+
+        // Alert the user that the product has been added
+        alert(name + " has been added to your basket!");
+
+        // Use setTimeout to ensure the alert is shown before redirecting
+        setTimeout(() => {
+            window.location.href = "index.html";  // Redirect to the homepage
+        }, 500);  // Delay the redirect by 0.5 seconds
+    }
+</script>
 
 </body>
 </html>
