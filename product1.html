@@ -89,10 +89,25 @@
       font-size: 16px;
       color: #333;
     }
+    .home-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #C28E00;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .home-button:hover {
+      background-color: #A47A00;
+    }
 
   </style>
 </head>
 <body>
+  <a href="index.html" class="home-button">Home</a>
 
 
   <div class="container">
@@ -111,13 +126,16 @@
         let name = document.querySelector(".product-details h3").innerText;
         let image = document.querySelector(".product-image img").src;
         let description = document.querySelector(".product-details p").innerText;
-        let price = document.querySelector(".product-price").innerText; // Add this line
+        let price = document.querySelector(".product-price").innerText;
 
         let basket = JSON.parse(localStorage.getItem("basket")) || [];
-        basket.push({ name, image, description, price }); // Include price
+        basket.push({ name, image, description, price });
         localStorage.setItem("basket", JSON.stringify(basket));
 
         alert(name + " has been added to your basket!");
+
+        // Redirect to index.html after adding to basket
+        window.location.href = "index.html";
     }
 </script>
     </div>
