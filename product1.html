@@ -108,13 +108,15 @@
 
 <script>
     function addToBasket() {
-        let name = document.querySelector("h3").innerText;
+        let name = document.querySelector(".product-details h3").innerText;
         let image = document.querySelector(".product-image img").src;
         let description = document.querySelector(".product-details p").innerText;
+        let price = document.querySelector(".product-price").innerText; // Add this line
 
         let basket = JSON.parse(localStorage.getItem("basket")) || [];
-        basket.push({ name, image, description });
+        basket.push({ name, image, description, price }); // Include price
         localStorage.setItem("basket", JSON.stringify(basket));
+
         alert(name + " has been added to your basket!");
     }
 </script>
