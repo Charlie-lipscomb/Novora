@@ -16,13 +16,8 @@
             background-color: #EDF8C7; /* Light background color */
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(248, 248, 248, 0.9); /* Slightly transparent white background */
-        }
+
+
 
         .logo {
             height: 250px;
@@ -34,13 +29,6 @@
             gap: 15px;
         }
 
-        .search-bar {
-            padding: 5px 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-        }
 
         .basket-btn, .account-btn {
             padding: 8px 16px;
@@ -104,21 +92,40 @@
         .product-card a:hover {
             color: #0056b3;
         }
+        
+        header {
+	    	display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #27692D;
+        }
+
+		.search-bar {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 auto; /* Centers it */
+        }
+
+		.nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
 
 	<header>
-	    <div class="nav-items">
-	        <img src="Logo.png" alt="Logo" class="logo">
-	        <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
-	        <div class="nav-buttons">
-	            <a href="Basket.html"><button class="basket-btn">Basket</button></a>
-	            <button class="account-btn" onclick="checkLogin();">Account</button>
-	            <a href="contactus.html"><button class="basket-btn">Contact Us</button></a>
-	        </div>
-	    </div>
-	</header>
+        <img src="Logo.png" alt="Logo" class="logo">
+    
+    	<input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
+    
+    	<div class="nav-buttons">
+     	   <a href="contactus.html"><button class="basket-btn">Contact Us</button></a>
+     	   <a href="Basket.html"><button class="basket-btn">Basket</button></a>
+     	   <button class="account-btn" onclick="checkLogin();">Account</button>
+         </div>
+    </header>
 
 
     <main>
