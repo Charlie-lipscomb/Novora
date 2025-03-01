@@ -122,25 +122,25 @@
         <a href="index.html" class="home-button">Back to Home</a>
     </div>
 
-<script>
-  document.getElementById("contact-form").onsubmit = function (event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+	<script>
+	  document.getElementById("contact-form").onsubmit = function (event) {
+	    event.preventDefault(); // Prevent the form from submitting normally
 
-    // Get form values
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var message = document.getElementById("message").value;
-
-    // Construct the email body with only the message
-    var emailBody = encodeURIComponent(message); // Only include the message content
-
-    // Construct the mailto link
-    var mailtoLink = "mailto:Novora.info@gmail.com?subject=Message%20from%20Contact%20Form&body=" + emailBody;
-
-    // Redirect to the mailto link, opening the user's email client
-    window.location.href = mailtoLink;
-  };
-</script>
+	    // Get form values
+	    var name = document.getElementById("name").value;
+	    var email = document.getElementById("email").value;
+	    var message = document.getElementById("message").value;
+	
+	    // Construct the email body with only the message
+	    var emailBody = "Message: " + message;  // Only include the message content, not name/email
+	
+	    // Construct the mailto link with subject and body
+	    var mailtoLink = "mailto:Novora.info@gmail.com?subject=Message%20from%20Contact%20Form&body=" + encodeURIComponent(emailBody);
+	
+	    // Redirect to the mailto link, opening the user's email client
+	    window.location.href = mailtoLink;
+	  };
+	</script>
 
 </body>
 </html>
