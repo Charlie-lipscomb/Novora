@@ -97,11 +97,11 @@
     <div class="container">
         <h1>Contact Us</h1>
         <div class="contact-info">
-            <p><strong>Email:</strong>novora.info@gmail.com</p>
-            <p><strong>Phone:</strong> +44 7418 321003</p>
+            <p><strong>Email:</strong> Novora.info@gmail.com</p>
+            <p><strong>Phone:</strong> +44 74183 21003</p>
         </div>
 
-                <div class="contact-form">
+        <div class="contact-form">
             <h2>Send Us a Message</h2>
             <form id="contactForm">
                 <label for="name">Your Name</label>
@@ -116,8 +116,29 @@
                 <button type="submit">Send Message</button>
             </form>
         </div>
+
+
+
         <a href="index.html" class="home-button">Back to Home</a>
     </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+
+            var emailBody = "Name: " + name + "%0D%0A" +
+                            "Email: " + email + "%0D%0A" +
+                            "Message: %0D%0A" + message;
+
+            var mailtoLink = "mailto:Novora.info@gmail.com?subject=Contact%20Message&body=" + emailBody;
+
+            window.location.href = mailtoLink;
+        });
+    </script>
 
 </body>
 </html>
