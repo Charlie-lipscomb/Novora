@@ -94,20 +94,18 @@
 </head>
 <body>
 
-    <div class="container">
+	<div class="container">
         <h1>Contact Us</h1>
         <div class="contact-info">
             <p><strong>Email:</strong> Novora.info@gmail.com</p>
             <p><strong>Phone:</strong> +44 74183 21003</p>
         </div>
-
-		<div class="contact-form">
-    		<h2>Send Us a Message</h2>
-            <form id="contactForm">
-        		<label for="name">Your Name</label>
-        		<input type="text" id="name" name="name" required>
-
-        		<label for="email">Your Email</label>
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+    		<form id="contactForm">
+                <label for="name">Your Name</label>
+            	<input type="text" id="name" name="name" required>
+            	<label for="email">Your Email</label>
         		<input type="email" id="email" name="email" required>
 
         		<label for="message">Your Message</label>
@@ -117,31 +115,33 @@
     		</form>
 		</div>
 
-
-
-        <a href="index.html" class="home-button">Back to Home</a>
-    </div>
-
 <script>
   // Adding event listener for form submission
   document.getElementById("contactForm").onsubmit = function(event) {
     event.preventDefault(); // Prevents the default form submission behavior
 
-    // Get the values entered in the form
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
+    // Get the value of the message field
     var message = document.getElementById("message").value;
 
-    // Construct the email body with separate fields
-    var emailBody = "Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message;
+    // Create the formatted message with the first line indented by 2 spaces and the rest indented normally
+    var formattedMessage = "    " + message.replace(/\n/g, "\n    ") ;  // 4 spaces
 
-    // Construct the mailto link with the subject and email body
-    var mailtoLink = "mailto:Novora.info@gmail.com?subject=Message%20from%20Contact%20Form&body=" + encodeURIComponent(emailBody);
+    // Construct the mailto link with the subject and formatted message body
+    var mailtoLink = "mailto:Novora.info@gmail.com?subject=Message%20from%20Contact%20Form&body=" + encodeURIComponent(formattedMessage);
 
     // Open the email client with the pre-filled message
     window.location.href = mailtoLink;
   };
 </script>
+
+		
+
+
+
+        <a href="index.html" class="home-button">Back to Home</a>
+    </div>
+
+
 
 </body>
 </html>
