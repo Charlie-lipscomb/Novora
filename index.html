@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novora Home Page</title>
     <style>
+        .banner{
+            display:flex; 
+            flex-direction: column ;
+            justify-content: baseline;
+            align-items: center;
+            gap: 1rem;
+            background:linear-gradient(rgba(161, 160, 160, 0.089),rgba(136, 135, 135, 0.116)),url("Diamond_RIng_Banner_2000x.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +25,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #94e0f7; /* Light background color */
+            background-color: #94e0fd; /* Light background color */
         }
 
 
@@ -107,25 +119,34 @@
             margin: 0 auto; /* Centers it */
         }
 
-		.nav-buttons {
+        .position{
             display: flex;
-            gap: 10px;
+            flex-direction: row;
+            justify-content: left;
+            align-items: left;
+            gap:5rem;
+            margin-top: 1rem;
+            
         }
+            
     </style>
 </head>
 <body>
 
-	<header>
-        <img src="Logo.png" alt="Logo" class="logo">
-    
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
-    
-        <div class="nav-buttons">
-            <a href="contactus.html"><button class="basket-btn">Contact Us</button></a>
-            <a href="Basket.html"><button class="basket-btn">Basket</button></a>
-            <a href="aboutus.html"><button class="basket-btn">About Us</button></a>
-            <button class="basket-btn" onclick="checkLogin();">Account</button>
+	<header class="banner">
+        <div class="position">
+            <img src="Logo.png" alt="Logo" class="logo">
+        
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search for a product...">
+        
+            <div>
+                <a href="contactus.html"><button class="basket-btn">Contact Us</button></a>
+                <a href="Basket.html"><button class="basket-btn">Basket</button></a>
+                <a href="aboutus.html"><button class="basket-btn">About Us</button></a>
+                <button class="basket-btn" onclick="checkLogin();">Account</button>
+            </div>
         </div>
+
     </header>
     
 
