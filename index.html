@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novora Home Page</title>
     <style>
-        .banner{
-            display:flex; 
-            flex-direction: column ;
-            justify-content: baseline;
-            align-items: center;
-            gap: 1rem;
-            background:linear-gradient(rgba(161, 160, 160, 0.089),rgba(136, 135, 135, 0.116)),url("Diamond_RIng_Banner_2000x.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            height: 100%;
-        }
+        .banner {
+		display: flex;
+		flex-direction: column;
+		justify-content: baseline;
+		align-items: center;
+		gap: 1rem;
+		background: linear-gradient(rgba(161, 160, 160, 0.03), rgba(136, 135, 135, 0.05)), 
+			url("Diamond_RIng_Banner_2000x.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		height: 100%;
+	}
         * {
             margin: 0;
             padding: 0;
@@ -43,13 +44,14 @@
 
 
         .basket-btn, .account-btn {
-            padding: 8px 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+		padding: 8px 16px;
+		background-color: #333;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-top: auto; /* Ensures vertical centering */
+	}
 
         .basket-btn:hover, .account-btn:hover {
             background-color: #2B2D42;
@@ -119,14 +121,13 @@
             margin: 0 auto; /* Centers it */
         }
 
-        .position{
-            display: flex;
-            flex-direction: row;
-            justify-content: left;
-            align-items: left;
-            gap:5rem;
-            
-        }
+        .position {
+		display: flex;
+		flex-direction: row;
+		justify-content: left;
+		align-items: center; /* Aligns items to the center */
+		gap: 5rem;
+	}
             
     </style>
 </head>
