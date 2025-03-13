@@ -103,7 +103,9 @@
             text-decoration: none;
             color: #007BFF;
         }
-
+	.small-product img {
+		transform: scale(0.8); /* Shrinks the image to 80% of original size */}
+	}
         .product-card a:hover {
             color: #0056b3;
         }
@@ -251,7 +253,7 @@
 
             products.forEach(product => {
                 const productCard = `
-                    <div class="product-card">
+                    <div class="product-card ${product.img === "Product44.png || product.img === "Product15.png" ? 'small-product' : ''}">
                         <div class="product-image">
                             <img src="${product.img}" alt="${product.name}">
                         </div>
