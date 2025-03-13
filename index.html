@@ -89,7 +89,7 @@
         }
 
         .product-image img {
-            width: 100%;
+            width: 100px;
             height: auto;
         }
 
@@ -253,7 +253,7 @@
 
             products.forEach(product => {
                 const productCard = `
-                    <div class="product-card ${product.img === "Product44.png || product.img === "Product15.png" ? 'small-product' : ''}">
+                    <div class="product-card">
                         <div class="product-image">
                             <img src="${product.img}" alt="${product.name}">
                         </div>
